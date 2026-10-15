@@ -1,0 +1,1282 @@
+\documentclass[12pt,a4paper]{article}
+
+% ----- Encoding and language -----------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[spanish,es-tabla,es-nodecimaldot, es-noquoting]{babel}
+\usepackage{microtype}
+
+% ----- Page layout --------------------------------------------------- 
+\usepackage[a4paper,left=2.6cm,right=2.6cm,top=2.8cm,bottom=2.6cm,headheight=15pt]{geometry}
+\linespread{1.15}
+\setlength{\parskip}{4pt}
+\setlength{\parindent}{0pt}
+
+% ----- Colors --------------------------------------------------------
+\usepackage[table]{xcolor}
+\definecolor{darkblue}{HTML}{0B2545}
+\definecolor{mediumblue}{HTML}{1D4E89}
+\definecolor{lightblue}{HTML}{DCE7F3}
+\definecolor{borderblue}{HTML}{B8C7DD}
+\definecolor{lightgray}{HTML}{F5F6F8}
+
+% ----- Packages ------------------------------------------------------
+\usepackage{graphicx,float,booktabs,tabularx,array,multirow,longtable}
+\usepackage{enumitem,amsmath,amssymb,caption,xparse,url}
+\usepackage{siunitx}
+\sisetup{output-decimal-marker={,}, inter-unit-product=\ensuremath{{}\cdot{}}}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning,patterns}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.16}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr,titlesec}
+
+% ----- Header and footer ---------------------------------------------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[L]{\sffamily\footnotesize\bfseries\color{darkblue} Facultad de
+Ingeniería Industrial}
+\fancyfoot[R]{\sffamily\footnotesize\bfseries\color{darkblue}Pag \thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.8pt}
+\renewcommand{\footrule}{{\color{darkblue}\hrule width\headwidth
+height\footrulewidth}}
+
+% ----- Section titles -----------------------------------------------
+\titleformat{\section}
+  {\sffamily\bfseries\Large\color{darkblue}}{\thesection.}{0.6em}{}
+  [{\vspace{-0.6ex}\color{mediumblue}\titlerule[1.3pt]}]
+\titleformat{\subsection}
+  {\sffamily\bfseries\large\color{mediumblue}}{\thesubsection}{0.6em}{}
+\titleformat{\subsubsection}
+  {\sffamily\bfseries\normalsize\color{darkblue}}{\thesubsubsection}{0.6em}{}
+\titlespacing*{\section}{0pt}{2.4ex plus 1ex minus .2ex}{1.6ex}
+\titlespacing*{\subsection}{0pt}{2.0ex plus .8ex minus .2ex}{1.0ex}
+\titlespacing*{\subsubsection}{0pt}{1.6ex plus .5ex}{0.6ex}
+\addto\captionsspanish{\renewcommand{\contentsname}{CONTENIDO}}
+
+% ----- Captions and tables ------------------------------------------
+\captionsetup{font=small,labelfont={bf,color=darkblue},labelsep=period,
+              textfont={color=black!80},skip=6pt}
+\renewcommand{\arraystretch}{1.22}
+\setlist{itemsep=2pt,topsep=3pt,parsep=0pt}
+
+% Table header cell (white text on dark blue)
+\newcommand{\encab}[1]{\textcolor{white}{\sffamily\bfseries #1}}
+
+% ----- Text boxes ----------------------------------------------------
+\newtcolorbox{nota}[1][Nota]{colback=lightblue,colframe=mediumblue,coltitle=white,
+  fonttitle=\sffamily\bfseries\small,title=#1,arc=2pt,boxrule=0.6pt,
+  left=7pt,right=7pt,top=4pt,bottom=4pt,breakable}
+\newtcolorbox{enunciado}{colback=lightblue,colframe=darkblue,arc=2pt,boxrule=0pt,
+  leftrule=3pt,left=8pt,right=8pt,top=4pt,bottom=4pt,breakable,fontupper=\sffamily\small}
+
+% ----- Image with placeholder box if file does not exist -------------
+% Usage \image[width][box height]{file}{description}
+\NewDocumentCommand{\image}{O{0.6} O{5cm} m m}{%
+  \IfFileExists{#3}{\includegraphics[width=#1\linewidth]{#3}}{%
+    {\setlength{\fboxsep}{0pt}\fcolorbox{borderblue}{lightgray}{%
+      \parbox[c][#2][c]{#1\linewidth}{\centering\sffamily\small\color{darkblue}%
+      \textbf{[ Insert image
+]}\\[3pt]\texttt{\detokenize{#3}}\\[3pt]\footnotesize #4}}}}}
+
+% ----- Links ---------------------------------------------------------
+\usepackage[colorlinks=true, breaklinks=true, linkcolor=darkblue,
+urlcolor=mediumblue, citecolor=darkblue,
+  pdftitle={Fabricación de un buje de bronce con ajuste H7/h6},
+  pdfauthor={Integrantes del grupo},
+  pdfsubject={Procesos de Manufactura — Trabajo de investigación —
+UNMSM}]{hyperref}
+\urlstyle{same}
+\makeatletter\g@addto@macro\UrlBreaks{\do\-}\makeatother
+\Urlmuskip=0mu plus 2mu\relax
+\setlength{\emergencystretch}{2.5em}
+\newcommand{\refbib}[1]{[\ref{#1}]}
+
+% =====================================================================
+
+% ----- NUEVO: unidades y atajos para los cálculos -------------------
+\DeclareSIUnit{\rev}{rev}
+\DeclareSIUnit{\rpm}{rpm}
+\newcommand{\umm}{\,\mathrm{mm}}
+\newcommand{\umin}{\,\mathrm{min}}
+\newcommand{\urpm}{\,\mathrm{rpm}}
+\newcommand{\umpm}{\,\mathrm{m/min}}
+\newcommand{\ummrev}{\,\mathrm{mm/rev}}
+\newcommand{\ummmin}{\,\mathrm{mm/min}}
+\newcommand{\ucmmin}{\,\mathrm{cm^3/min}}
+\newcommand{\uum}{\,\mu\mathrm{m}}
+
+% =====================================================================
+\begin{document}
+% =====================================================================
+
+% ===== COVER PAGE ====================================================
+\begin{titlepage}
+	\thispagestyle{empty}
+	\begin{tikzpicture}[remember picture,overlay]
+		\fill[darkblue] (current page.north west) rectangle ($(current page.north
+			east)+(0,-4.4cm)$);
+		\fill[mediumblue] ($(current page.north west)+(0,-4.4cm)$) rectangle
+		($(current page.north east)+(0,-4.65cm)$);
+		\fill[darkblue] (current page.south west) rectangle ($(current page.south
+			east)+(0,1.1cm)$);
+		\node[text=white,align=center,text width=16cm,font=\sffamily] at ($(current
+			page.north)+(0,-2.25cm)$) {%
+			{\Large\bfseries UNIVERSIDAD NACIONAL MAYOR DE SAN MARCOS}\\[5pt]
+			{\small\itshape Universidad del Perú, Decana de América}\\[10pt]
+			{\normalsize\bfseries ESCUELA PROFESIONAL DE INGENIERÍA INDUSTRIAL}};
+	\end{tikzpicture}
+
+	\vspace*{2cm}
+
+	\begin{center}
+		\image[0.22][4.3cm]{img/unmsm-logo.png}{}
+
+		\vspace{0.8cm}
+		{\sffamily\bfseries\color{darkblue}\fontsize{21}{25}\selectfont
+			Fabricación de un buje de bronce\\con ajuste H7/h6\par}
+
+		\vspace{0.3cm}
+		{\sffamily\large\color{mediumblue} Trabajo de investigación: proceso de
+			torneado\par}
+
+		\vspace{0.4cm}
+
+		\begin{tcolorbox}[colback=white,colframe=white,arc=3pt,width=0.9\linewidth,
+				box align=center,left=12pt,right=12pt,top=8pt,bottom=8pt]
+			\centering\sffamily
+			\begin{tabular}{@{}>{\bfseries\color{darkblue}}r@{\hspace{1em}}l@{}}
+				Asignatura: & Procesos de Manufactura (L1-3) \\[5pt]
+				Docente:    & Mg. Ing. Víctor Rosales Urbano \\
+			\end{tabular}
+		\end{tcolorbox}
+
+		\vspace{0.4cm}
+		{\sffamily\bfseries\color{darkblue}\large Integrantes\par}
+		\vspace{5pt}
+		\sffamily\begin{tabular}{@{}l@{\hspace{2.5em}}r@{}}
+			Apellidos, Nombres del integrante 1 & (código) \\
+			Apellidos, Nombres del integrante 2 & (código) \\
+			Apellidos, Nombres del integrante 3 & (código) \\
+			Apellidos, Nombres del integrante 4 & (código) \\
+		\end{tabular}
+	\end{center}
+
+	\vfill
+	\begin{center}
+		{\sffamily\bfseries\color{darkblue}\large Lima, octubre de 2026\par}
+	\end{center}
+\end{titlepage}
+\setcounter{page}{2}
+
+% ===== CONTENIDO =====================================================
+\tableofcontents
+\newpage
+
+% ===== 1. INTRODUCCIÓN ===============================================
+\section{INTRODUCCIÓN}
+
+El buje (o casquillo) es uno de los elementos de máquina más sencillos y, a la
+vez, más frecuentes: un cilindro hueco que sirve de superficie de apoyo y guía
+para un eje. Su función depende casi por completo de dos diámetros y de la
+relación entre ellos, es decir, del \emph{ajuste}. Un buje con demasiado juego
+deja de guiar; uno con muy poco juego se agarrota. Por eso su fabricación es un
+buen ejemplo de cómo el proceso de manufactura (torneado) y la tolerancia
+especificada en el plano se condicionan mutuamente.\\[-4pt]
+
+Este trabajo de investigación plantea, de forma \textbf{teórica}, la
+fabricación de un buje de bronce con ajuste \textbf{H7/h6} mediante torneado.
+Se parte de las fórmulas de mecanizado vistas en el curso (velocidad de corte,
+avance, caudal de viruta, número de pasadas y tiempos) y se aplican paso a paso
+a cada operación, de modo que el documento pueda leerse como una hoja de
+proceso completa y justificada.
+
+\subsection{Objetivo del proyecto}
+
+\textbf{Objetivo general.} Planificar la fabricación por torneado de un buje de
+bronce SAE 660 con ajuste H7/h6, determinando la secuencia de operaciones, los
+parámetros de corte y los tiempos de mecanizado, y verificando analíticamente
+que el proceso es capaz de cumplir las tolerancias especificadas.
+
+\textbf{Objetivos específicos.}
+\begin{itemize}
+	\item Definir la geometría de la pieza y las tolerancias dimensionales,
+	      geométricas y de acabado superficial que exige el ajuste H7/h6.
+	\item Seleccionar el material de partida, la máquina y las herramientas de
+	      corte adecuadas para un bronce al plomo.
+	\item Calcular, con las fórmulas del curso, la velocidad de corte, las rpm,
+	      el avance, la profundidad y el número de pasadas, el caudal de viruta y
+	      los tiempos de cada operación.
+	\item Elaborar la hoja de ruta y el plano de fabricación de la pieza.
+	\item Estimar el presupuesto de errores del proceso y compararlo con la banda
+	      de tolerancia, proponiendo mejoras.
+\end{itemize}
+
+\subsection{Descripción de la pieza}
+
+La pieza es un buje cilíndrico de pared delgada, sin brida, con las
+características de la Tabla~\ref{tab:pieza}. Su agujero ($\varnothing 25$ H7)
+aloja un eje $\varnothing 25$ h6, y su diámetro exterior ($\varnothing 32$ p6)
+se monta a presión en un alojamiento H7, de modo que el buje queda fijo en la
+carcasa y el eje gira (o se desliza) dentro de él.
+
+\begin{table}[!htb]
+	\centering
+	\caption{Especificaciones generales del buje}\label{tab:pieza}
+	\small
+	\rowcolors{1}{white}{lightblue}
+	\begin{tabularx}{\linewidth}{>{\bfseries}l X}
+		Denominación          & Buje cilíndrico de bronce (sin brida)
+		\\
+		Material              & Bronce al plomo SAE 660 (UNS C93200), barra
+		redonda $\varnothing 35$ mm                                                                                                       \\
+		Diámetro interior     & $\varnothing 25$ H7 $=
+			                                            25{,}000^{+0{,}021}_{\;\;0}$ mm                                                      \\
+		Diámetro exterior     & $\varnothing 32$ p6 $= 32^{+0{,}042}_{+0{,}026}$
+		mm                                                                                                                                \\
+		Longitud              & $40 \pm 0{,}1$ mm
+		\\
+		Chaflanes             & $1\times45^\circ$ en el exterior y
+		$0{,}5\times45^\circ$ en el interior                                                                                              \\
+		Acabado superficial   & Ra $\le 0{,}8$ \textmu m en el agujero; Ra $\le
+			                                                                   1{,}6$ \textmu m en el exterior                               \\
+		Tolerancia geométrica & Coaxialidad agujero--exterior $\le \varnothing 0{,}02$ mm; perpendicularidad de las caras $\le 0{,}02$ mm \\
+		Tolerancia general    & ISO 2768-m para cotas sin tolerancia indicada                                                             \\
+		Masa aproximada       & 0,11 kg ($V\approx 12{,}5$ cm$^3$)                                                                        \\
+	\end{tabularx}
+\end{table}
+
+\textbf{¿Por qué H7/h6?} En el sistema ISO de ajustes, H7/h6 es un ajuste de
+\emph{juego mínimo} (deslizante o de posicionamiento): el agujero H7 tiene su
+desviación inferior en cero y el eje h6 tiene su desviación superior en cero,
+de modo que en el peor caso el juego es nulo y en el mejor caso es solo de unas
+pocas centésimas de milímetro. Es adecuado para guiar con precisión piezas que
+giran o se deslizan lentamente y con lubricación, como casquillos guía,
+pasadores y ejes de mecanismos de precisión; no lo es para ejes que giran a alta
+velocidad, donde se requiere un juego mayor para formar la película de aceite
+(por ejemplo, H7/f7).
+
+\begin{nota}[Alcance y supuestos del trabajo]
+	No se fabricó la pieza: todos los valores son resultado de cálculo.
+	Las velocidades de corte se tomaron de la tabla del curso (Anexo~A); los
+	valores de propiedades del material son típicos de la literatura (deben
+	confirmarse con el certificado del proveedor); y los tiempos auxiliares
+	(carga, cambio de herramienta, inspección) son estimaciones razonadas. Se
+	asume un torno CNC de bancada inclinada con velocidad de husillo máxima de
+	4\,000 rpm.
+\end{nota}
+
+% ===== 2. MARCO TEÓRICO ==============================================
+\section{MARCO TEÓRICO}
+
+\subsection{El torno y su selección}
+
+El \textbf{torno} es la máquina-herramienta que fabrica \emph{piezas de
+	revolución}: la pieza gira sujeta en el plato del husillo y una herramienta de
+un solo filo, montada en la torreta o en el carro, avanza contra ella y arranca
+viruta. Sus partes principales (Figura~\ref{fig:partes}) son el \emph{plato} con
+sus \emph{mordazas}, que sujetan y centran la pieza; el \emph{cabezal} o husillo
+principal, que le da el giro; la \emph{torreta}, que porta las herramientas; los
+\emph{carros} longitudinal y transversal, que producen el avance; y la
+\emph{bancada}, que soporta y guía todo el conjunto. En el torno paralelo
+convencional se añaden la caja de velocidades, el tornillo patrón y la
+contrapunta; en el torno CNC estos movimientos los gobierna el control numérico.
+
+\begin{figure}[H]
+	\centering
+	\image[0.62][5.2cm]{img/partes_torno_cnc.png}{Partes de un torno CNC: plato, mordazas y torreta}
+	\caption{Partes principales de un torno CNC (imagen referencial).}\label{fig:partes}
+\end{figure}
+
+La Tabla~\ref{tab:tornos} resume los tipos de torno y su idoneidad para fabricar
+un buje.
+
+\begin{table}[!htb]
+	\centering
+	\caption{Tipos de torno y su idoneidad para el buje}\label{tab:tornos}
+	\small
+	\rowcolors{2}{white}{lightblue}
+	\begin{tabularx}{\linewidth}{l X c}
+		\rowcolor{darkblue}
+		\encab{Tipo}                                    & \encab{Característica}
+		                                                & \encab{Idoneidad}
+		\\
+		Paralelo                                        & Máquina universal, de operación manual; hoy se
+		reserva a trabajos puntuales o de mantenimiento & Baja                                                                                             \\
+		Copiador                                        & Reproduce una réplica de una plantilla o guía
+		                                                & Baja                                                                                             \\
+		Revólver                                        & Varias herramientas trabajan casi simultáneamente para
+		reducir tiempo en series                        & Media                                                                                            \\
+		Automático                                      & Alimentación de barra y ciclo automático, para grandes
+		series                                          & Media
+		\\
+		Vertical                                        & Eje vertical; fabrica piezas de gran tamaño
+		                                                & Nula                                                                                             \\
+		\textbf{CNC}                                    & Dirigido por computadora; gran capacidad de producción y precisión de mecanizado & \textbf{Alta} \\
+	\end{tabularx}
+\end{table}
+
+Para un buje con tolerancia IT6--IT7 y dos diámetros que deben quedar coaxiales,
+conviene el \textbf{torno CNC}: permite hacer refrentado, taladrado, mandrinado,
+cilindrado y tronzado en una sola sujeción de la barra, lo que minimiza el error
+de coaxialidad, y repite las mismas condiciones de corte de pieza a pieza.
+
+\subsection{Operaciones de torneado}
+
+El torneado agrupa varias operaciones según la trayectoria de la herramienta
+respecto del eje de giro (Tabla~\ref{tab:operaciones}). En el buje intervienen
+seis de ellas.
+
+\begin{table}[!htb]
+	\centering
+	\caption{Operaciones de torneado y su uso en el buje}\label{tab:operaciones}
+	\small
+	\rowcolors{2}{white}{lightblue}
+	\begin{tabularx}{\linewidth}{l X c}
+		\rowcolor{darkblue}
+		\encab{Operación}                & \encab{Descripción}
+		                                 & \encab{¿Se usa?}
+		\\
+		Cilindrado exterior              & Da forma exterior y reduce el diámetro de
+		la barra                         & Sí                                                                           \\
+		Cilindrado interior (mandrinado) & Cilindros o conos interiores y ranuras interiores en piezas agujereadas & Sí \\
+		Refrentado                       & Superficie plana perpendicular al eje de giro                           & Sí \\
+		Tronzado                         & Seccionamiento de la barra o pieza con una herramienta de tronzar       & Sí \\
+		Forma / chaflanado               & Perfiles definidos por el filo o la trayectoria; incluye los chaflanes  & Sí \\
+		Taladrado (en torno)             & Agujero axial con broca montada en el
+		contrapunto o la torreta         & Sí
+		\\
+		Roscado                          & Varias pasadas a lo largo de la longitud de la rosca                    & No \\
+		Ranurado                         & Abre ranuras o canales en las piezas                                    & No \\
+		Moleteado                        & Produce una superficie áspera o rugosa con moletas                      & No \\
+		Cónico                           & Superficies cónicas por inclinación del carro o interpolación           & No \\
+	\end{tabularx}
+\end{table}
+
+En toda operación de arranque conviene distinguir dos tipos de pasada
+(Tabla~\ref{tab:desbaste}). El \textbf{desbaste} quita la mayor cantidad de
+material para acercarse a la medida final; el \textbf{acabado} es una pasada casi
+superficial que da la tolerancia y la rugosidad. Se desbasta con velocidad de
+corte moderada, avance alto y gran profundidad; se acaba con velocidad alta,
+avance bajo y poca profundidad.
+
+\begin{table}[!htb]
+	\centering
+	\caption{Desbaste frente a acabado}\label{tab:desbaste}
+	\small
+	\rowcolors{2}{white}{lightblue}
+	\begin{tabular}{l c c}
+		\rowcolor{darkblue}
+		\encab{Parámetro}    & \encab{Desbaste} & \encab{Acabado} \\
+		Velocidad de corte   & baja             & alta            \\
+		Avance               & alto             & bajo            \\
+		Profundidad de corte & grande           & pequeña         \\
+		Tiempo de mecanizado & bajo             & alto            \\
+	\end{tabular}
+\end{table}
+
+\subsection{Fórmulas de mecanizado}
+
+Las siguientes relaciones, vistas en clase~\refbib{bib:clase}, se emplean en los
+cálculos de la sección~\ref{sec:calculos}. La nomenclatura completa se resume en
+el Anexo~B.\\[-4pt]
+
+\textbf{Velocidad de corte.} Es la velocidad tangencial en la superficie de la
+pieza. Con $n$ en rev/min y $1\ \text{rev}=2\pi$:
+\begin{equation}\label{eq:v}
+	v = n\left(\frac{D_i}{2}\right)\ \Longrightarrow\ v=\frac{\pi\, D_i\, n}{1000}
+	\quad[\text{m/min};\ D_i\ \text{en mm};\ n\ \text{en rpm}]
+\end{equation}
+Despejando, la velocidad de giro que corresponde a una velocidad de corte
+recomendada es $n = 1000\,v/(\pi D_i)$.
+
+\textbf{Velocidad lineal o de avance.}
+\begin{equation}\label{eq:vl}
+	v_L = n\cdot a \qquad [\text{mm/min}]
+\end{equation}
+donde $a$ es el avance por revolución (mm/rev).
+
+\textbf{Caudal de viruta.} Volumen de material arrancado por unidad de tiempo:
+\begin{equation}\label{eq:Q}
+	Q = v_L\cdot A
+\end{equation}
+con $A$ el área de la corona circular removida en la pasada,
+$A=\frac{\pi}{4}\left(D_i^2-D_f^2\right)$.
+
+\textbf{Profundidad de corte y número de pasadas.} La profundidad total radial
+que debe quitarse se reparte entre pasadas de desbaste y de acabado, y el número
+de pasadas debe ser entero:
+\begin{equation}\label{eq:pT}
+	p_T=\frac{D_i-D_f}{2}=N_D\,P_D+N_A\,P_A
+\end{equation}
+Valores usuales: acabado $P_A\approx 0{,}1$--$0{,}5$ mm; desbaste $P_D\approx
+	0{,}4$--$3$ mm.
+
+\textbf{Tiempo de pasada y tiempo de mecanizado.}
+\begin{equation}\label{eq:tp}
+	t_p=\frac{L+y+\Delta}{v_L}=\frac{L+y+\Delta}{a\cdot n},
+	\qquad t_m = N\left(\frac{L+y+\Delta}{a\cdot n}\right)
+\end{equation}
+donde $L$ es la longitud mecanizada, $y$ el retiro (aproximación) de la
+herramienta, de 1 a 3 mm, y $\Delta$ la distancia adicional debida al ángulo de
+posición $\omega$ de la herramienta: $\tan\omega = p/\Delta$. Si $\omega=90^\circ$
+resulta $\Delta=0$ y si $\omega=45^\circ$ resulta $\Delta=p$.
+
+\textbf{Rugosidad teórica.} Para una herramienta con radio de punta $r_\varepsilon$
+y avance $a$, la rugosidad geométrica aproximada es~\refbib{bib:groover}
+\begin{equation}\label{eq:Ra}
+	R_a \approx \frac{a^2}{32\, r_\varepsilon}
+\end{equation}
+
+\textbf{Taladrado.} Para una broca de diámetro $d$ y ángulo de punta $\theta$, la
+punta añade al recorrido una distancia
+$\Delta = \dfrac{d/2}{\tan(\theta/2)}\approx 0{,}3\,d$ para $\theta=118^\circ$.
+
+\subsection{Tolerancias y ajustes ISO}
+
+El sistema ISO 286~\refbib{bib:iso286} expresa la tolerancia de una cota como
+una letra (posición de la zona respecto de la línea de cero: mayúscula para
+agujeros, minúscula para ejes) y un número (grado de tolerancia IT, que fija el
+ancho de la zona). Para el agujero H la desviación inferior es $EI=0$ y para el
+eje h la desviación superior es $es=0$. Los juegos extremos de un ajuste son
+\begin{equation}\label{eq:juego}
+	J_{\max}=ES-ei,\qquad J_{\min}=EI-es
+\end{equation}
+y si el resultado es negativo se trata de \emph{aprieto}. Los anchos de zona que
+interesan en este trabajo se muestran en la Tabla~\ref{tab:IT}.
+
+\begin{table}[!htb]
+	\centering
+	\caption{Anchos de tolerancia ISO utilizados (ISO 286-1)}\label{tab:IT}
+	\small
+	\rowcolors{2}{white}{lightblue}
+	\begin{tabular}{c c c c}
+		\rowcolor{darkblue}
+		\encab{Rango nominal (mm)} & \encab{IT6 (\textmu m)} & \encab{IT7 (\textmu m)} & \encab{Cota del buje}    \\
+		18 a 30                    & 13                      & 21                      & $\varnothing 25$ (H7/h6) \\
+		30 a 50                    & 16                      & 25                      & $\varnothing 32$ (H7/p6) \\
+	\end{tabular}
+\end{table}
+
+\subsection{Material: bronce al plomo SAE 660}
+
+Los cojinetes de fricción se fabrican en bronces porque combinan resistencia
+suficiente, buen comportamiento a la fricción y desgaste, y una dureza menor que
+la del eje de acero, de modo que el desgaste se concentra en la pieza más barata
+y fácil de reemplazar (el buje). El \textbf{SAE 660} (UNS C93200, ``bronce
+83-7-7-3'') es el bronce al plomo-estaño más usado para casquillos de carga
+media y velocidad moderada; el plomo forma inclusiones blandas que mejoran el
+deslizamiento en caso de lubricación deficiente y que, además, fragmentan la
+viruta, lo que lo hace muy fácil de mecanizar. La Tabla~\ref{tab:material}
+resume sus propiedades típicas~\refbib{bib:astm}.
+
+\begin{table}[!htb]
+	\centering
+	\caption{Propiedades típicas del bronce SAE 660 (UNS
+		C93200)}\label{tab:material}
+	\small
+	\rowcolors{1}{white}{lightblue}
+	\begin{tabularx}{\linewidth}{>{\bfseries}l X}
+		Composición nominal (\%)    & Cu 83; Sn 7; Pb 7; Zn 3                                        \\
+		Resistencia a la tracción   & $\approx 240$ MPa                                              \\
+		Límite elástico             & $\approx 125$ MPa                                              \\
+		Dureza                      & $\approx 65$--$70$ HB                                          \\
+		Maquinabilidad              & $\approx 70\,\%$ (referencia: latón de corte libre $=100\,\%$) \\
+		Densidad                    & $\approx 8{,}8$ g/cm$^3$                                       \\
+		Coef. de dilatación térmica & $\approx 18\times10^{-6}\ ^\circ\text{C}^{-1}$                 \\
+		Viruta                      & Corta y fragmentada (no requiere rompevirutas)                 \\
+	\end{tabularx}
+\end{table}
+
+\subsection{Herramientas}
+
+La Tabla~\ref{tab:herramientas} lista las herramientas del proceso. Para el
+bronce (grupo ISO N, materiales no ferrosos) se emplea metal duro sin
+recubrimiento y con geometría positiva y filo vivo, que corta con poca fuerza y
+evita que el material se adhiera al filo. La broca se afila con un ángulo de
+ataque reducido para que no se ``clave'' en el bronce.
+
+\begin{table}[!htb]
+	\centering
+	\caption{Herramientas de la hoja de ruta}\label{tab:herramientas}
+	\small
+	\rowcolors{2}{white}{lightblue}
+	\begin{tabularx}{\linewidth}{c l X}
+		\rowcolor{darkblue}
+		\encab{Cód.} & \encab{Herramienta}              & \encab{Descripción}                                                                                                       \\
+		T01          & Cilindrado y refrentado exterior & Porta-inserto de $93^\circ$ con inserto rómbico $55^\circ$ tipo DCGT 11T304, metal duro ISO N, $r_\varepsilon=0{,}4$ mm   \\
+		T02          & Broca de centros                 & HSS, $\varnothing 4$ mm                                                                                                   \\
+		T03          & Broca helicoidal                 & HSS-Co, $\varnothing 22$ mm, punta $118^\circ$, con ataque reducido                                                       \\
+		T04          & Mandrinado                       & Barra $\varnothing 16$ mm (mín. $\approx 20$ mm de agujero) con inserto tipo CCGT 060204, ISO N, $r_\varepsilon=0{,}4$ mm \\
+		T05          & Tronzado                         & Porta-inserto de tronzar con inserto de 3 mm de ancho (tipo MGMN 300)                                                     \\
+	\end{tabularx}
+\end{table}
+
+\newpage
+
+% ===== 3. DESARROLLO =================================================
+\section{DESARROLLO}
+
+\subsection{Planos de la pieza}
+
+La Figura~\ref{fig:plano} muestra el plano de fabricación del buje: corte
+longitudinal con las cotas y tolerancias, y vista frontal. Las zonas rayadas son
+la sección del material.
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[scale=0.23,line cap=round,
+			dim/.style={<->,>=Stealth,line width=0.4pt,color=black},
+			ext/.style={line width=0.3pt,color=black!60},
+			cl/.style={dash dot,line width=0.4pt,color=mediumblue},
+			lead/.style={->,>=Stealth,line width=0.4pt,color=black},
+			lbl/.style={font=\sffamily\scriptsize,text=darkblue}]
+		% --- Sección: dos paredes simétricas respecto del eje
+		\foreach \s in {1,-1}{
+				\begin{scope}[yscale=\s]
+					\path[pattern=north east lines,pattern color=mediumblue!70]
+					(0,13)--(0,15)--(1,16)--(39,16)--(40,15)--(40,13)--(39.5,12.5)--(0.5,12.5)--cycle;
+					\draw[draw=darkblue,line width=0.9pt,line join=round]
+					(0,13)--(0,15)--(1,16)--(39,16)--(40,15)--(40,13)--(39.5,12.5)--(0.5,12.5)--cycle;
+				\end{scope}}
+		\draw[cl] (-4,0)--(44,0);
+		% --- Longitud
+		\draw[ext] (0,-17)--(0,-24); \draw[ext] (40,-17)--(40,-24);
+		\draw[dim] (0,-22)--(40,-22) node[midway,below,lbl] {$40\pm0{,}1$};
+		% --- Diámetro interior
+		\draw[ext] (40.5,12.5)--(48,12.5); \draw[ext] (40.5,-12.5)--(48,-12.5);
+		\draw[dim] (46,-12.5)--(46,12.5);
+		\node[lbl,rotate=90,anchor=south] at (46,0) {$\varnothing25$ H7 $\left({}^{+0{,}021}_{\;\;0}\right)$};
+		% --- Diámetro exterior
+		\draw[ext] (41,16)--(55,16); \draw[ext] (41,-16)--(55,-16);
+		\draw[dim] (53,-16)--(53,16);
+		\node[lbl,rotate=90,anchor=south] at (53,0) {$\varnothing32$ p6 $\left({}^{+0{,}042}_{+0{,}026}\right)$};
+		% --- Chaflanes
+		\draw[lead] (-5,20)--(0.5,15.6); \node[lbl,anchor=east] at (-5,20) {$1\times45^\circ$};
+		\draw[lead] (-5,7)--(0.25,12.8); \node[lbl,anchor=east] at (-5,7) {$0{,}5\times45^\circ$};
+		% --- Rugosidad
+		\draw[lead] (20,6)--(20,12.4); \node[lbl] at (20,4.5) {Ra 0,8 \textmu m};
+		\draw[lead] (20,21)--(20,16.1); \node[lbl] at (20,22.4) {Ra 1,6 \textmu m};
+		\node[lbl] at (20,-28) {\itshape Corte longitudinal (cotas en mm)};
+	\end{tikzpicture}
+
+	\vspace{6pt}
+	\begin{minipage}[c]{0.34\linewidth}
+		\centering
+		\begin{tikzpicture}[scale=0.13,line cap=round,
+				cl/.style={dash dot,line width=0.4pt,color=mediumblue},
+				lbl/.style={font=\sffamily\scriptsize,text=darkblue}]
+			\draw[draw=darkblue,line width=0.9pt,fill=lightblue] (0,0) circle (16);
+			\draw[draw=darkblue,line width=0.9pt,fill=white] (0,0) circle (12.5);
+			\draw[draw=darkblue,line width=0.4pt] (0,0) circle (15);
+			\draw[draw=darkblue,line width=0.4pt] (0,0) circle (13);
+			\draw[cl] (-19,0)--(19,0); \draw[cl] (0,-19)--(0,19);
+			\node[lbl] at (0,-21.5) {\itshape Vista frontal};
+		\end{tikzpicture}
+	\end{minipage}\hfill
+	\begin{minipage}[c]{0.62\linewidth}
+		\small
+		\rowcolors{1}{white}{lightblue}
+		\begin{tabularx}{\linewidth}{>{\bfseries}l X}
+			Pieza        & Buje de bronce                           \\
+			Material     & SAE 660 (UNS C93200)                     \\
+			Tol. general & ISO 2768-m                               \\
+			Coaxialidad  & $\varnothing 0{,}02$ (agujero--exterior) \\
+			Unidades     & mm; esquema no a escala                  \\
+		\end{tabularx}
+	\end{minipage}
+	\caption{Plano de fabricación del buje: corte longitudinal y vista
+		frontal.}\label{fig:plano}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\image[0.8][6cm]{img/plano_buje_cad.png}{Plano de fabricación en CAD (formato A4) con cajetín y vistas acotadas}
+	\caption{Plano del buje elaborado en CAD (insertar el plano del grupo).}\label{fig:plano_cad}
+\end{figure}
+
+\subsection{Hoja de ruta}
+
+El proceso se realiza en dos sujeciones de un torno CNC (Figura~\ref{fig:flujo}).
+En la primera, la barra de $\varnothing 35$ mm queda en el plato con un voladizo
+de 50 mm ($41$ mm de pieza $+\ 3$ mm del tronzador $+\ 6$ mm de holgura); se
+refrenta, se hace el agujero y se tornea el exterior \emph{sin soltar la barra},
+de modo que ambos diámetros quedan coaxiales por construcción. Después se
+tronza la pieza a 41 mm y, en la segunda sujeción, se invierte en mordazas
+blandas y se refrenta a la longitud final de 40 mm.
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[node distance=5mm,
+			caja/.style={rectangle,rounded
+					corners=3pt,fill=darkblue,text=white,font=\sffamily\scriptsize\bfseries,
+					minimum height=1.1cm,minimum width=2.3cm,align=center,inner sep=3pt},
+			flecha/.style={-{Stealth[length=2.2mm]},thick,color=mediumblue}]
+		\node[caja] (a) {Sujetar barra\\$\varnothing35$};
+		\node[caja,right=of a] (b) {Refrentar\\cara 1};
+		\node[caja,right=of b] (c) {Centrar y taladrar\\$\varnothing22$};
+		\node[caja,right=of c] (d) {Mandrinar\\$\varnothing25$ H7};
+		\node[caja,right=of d] (e) {Cilindrar\\$\varnothing32$ p6};
+		\node[caja,below=7mm of a] (f) {Chaflanes\\cara 1};
+		\node[caja,right=of f] (g) {Tronzar\\a 41 mm};
+		\node[caja,right=of g] (h) {Invertir en\\mordazas blandas};
+		\node[caja,right=of h] (i) {Refrentar a 40\\y chaflanes};
+		\node[caja,fill=mediumblue,right=of i] (j) {Inspección\\final};
+		\draw[flecha] (a)--(b); \draw[flecha] (b)--(c); \draw[flecha] (c)--(d); \draw[flecha] (d)--(e);
+		\draw[flecha] (e.south) -- ++(0,-3.5mm) -| ($(f.north)+(0,3.5mm)$) -- (f.north);
+		\draw[flecha] (f)--(g); \draw[flecha] (g)--(h); \draw[flecha] (h)--(i); \draw[flecha] (i)--(j);
+	\end{tikzpicture}
+	\caption{Secuencia general de fabricación del buje.}\label{fig:flujo}
+\end{figure}
+
+La Tabla~\ref{tab:ruta} es la hoja de ruta con las condiciones de corte
+adoptadas (justificadas en la sección~\ref{sec:calculos}). Los tiempos de las
+operaciones 20 a 110 son tiempos de corte; las operaciones 10, 90 y 120 son
+tiempos auxiliares y se tratan aparte.
+
+	{\small
+		\setlength{\tabcolsep}{3pt}
+		\rowcolors{2}{white}{lightblue}
+		\begin{longtable}{c >{\raggedright\arraybackslash}p{3.8cm} c c c c c}
+			\caption{Hoja de ruta del buje}\label{tab:ruta}
+			\\
+			\rowcolor{darkblue}
+			\encab{Op.}                                        & \encab{Descripción}
+			                                                   & \encab{Herr.}                                                           & \encab{$n$ (rpm)} &
+			\encab{$a$ (mm/rev)}                               & \encab{$p$ (mm)}
+			                                                   & \encab{$t$ (min)}
+			\\
+			\endfirsthead
+			\rowcolor{darkblue}
+			\encab{Op.}                                        & \encab{Descripción}                                                     & \encab{Herr.}     & \encab{$n$ (rpm)} &
+			\encab{$a$ (mm/rev)}                               & \encab{$p$ (mm)}
+			                                                   & \encab{$t$ (min)}
+			\\
+			\endhead
+			10                                                 & Sujetar barra $\varnothing35$ en plato de 3 mordazas; voladizo de 50 mm & ---               & ---               & ---         & ---              & aux.  \\
+			20                                                 & Refrentado cara 1: desbaste y acabado                                   & T01               & 2\,700 / 3\,400   & 0,30 / 0,10 & 0,7 / 0,3        & 0,081 \\
+			30                                                 & Punto de centro                                                         & T02               & 2\,400            & 0,10        & ---              & 0,029 \\
+			40                                                 & Taladrado $\varnothing22$, profundidad 46 mm                            & T03               & 430               & 0,20        & ---              & 0,635 \\
+			50                                                 & Mandrinado a $\varnothing25{,}010$: 2 desbastes y 1 acabado             & T04               & 3\,000 / 4\,000   & 0,15 / 0,08 & 0,6 (×2) / 0,305 & 0,333 \\
+			60                                                 & Cilindrado exterior a $\varnothing32{,}034$: 1 desbaste y 1 acabado     & T01               & 2\,700 / 3\,700   & 0,30 / 0,10 & 1,2 / 0,283      & 0,181 \\
+			70                                                 & Chaflanes cara 1: ext. $1\times45^\circ$, int. $0{,}5\times45^\circ$    & T01, T04          & 3\,700 / 4\,000   & 0,10 / 0,08 & ---              & 0,012 \\
+			80                                                 & Tronzado a 41 mm de
+			la cara 1                                          & T05                                                                     & 2\,700
+			                                                   & 0,08                                                                    & ---               & 0,026                                                      \\
+			90                                                 & Invertir la pieza en mordazas blandas                                   & ---               & ---               & ---         & ---              & aux.  \\
+			100                                                & Refrentado cara 2 a 40 mm: desbaste y acabado                           & T01               & 2\,700 / 3\,700   & 0,30 / 0,10 & 0,7 / 0,3        & 0,022 \\
+			110                                                & Chaflanes cara 2 (iguales a la op. 70)                                  & T01, T04
+			                                                   & 3\,700 / 4\,000                                                         & 0,10 / 0,08       & ---               & 0,012                                  \\
+			120                                                & Desbarbado e inspección final                                           & ---               & ---               & ---         & ---              & aux.  \\
+			\hline
+			\multicolumn{6}{r}{\textbf{Tiempo de corte total}} & \textbf{1,331}
+			\\
+		\end{longtable}}
+
+\subsection{Cálculos de parámetros}\label{sec:calculos}
+
+\subsubsection{Selección de las velocidades de corte}
+
+Para el bronce con inserto de metal duro la tabla del curso (Anexo~A) recomienda
+$v=300$ m/min en desbaste y $v=380$ m/min en acabado; para herramientas de acero
+rápido (broca de centros y broca helicoidal) recomienda $v=30$ m/min. El
+procedimiento en todas las operaciones es el mismo: (1) obtener $n$ ideal con
+$n=1000\,v/(\pi D_i)$; (2) adoptar una $n$ realizable por la máquina, sin superar
+la $v$ de la tabla; (3) recalcular la $v$ real con la ecuación~\eqref{eq:v}.
+
+\subsubsection{Cilindrado exterior (OP 60)}
+
+Se parte de $D_i=35$ mm. El diámetro final se fija en el \textbf{centro} de la
+zona p6 ($32{,}026$ a $32{,}042$ mm), es decir $D_f=32{,}034$ mm, para repartir
+el margen de error hacia ambos lados.
+\begin{align*}
+	p_T & = \frac{D_i-D_f}{2}=\frac{35-32{,}034}{2}=1{,}483\umm                                   \\
+	p_T & = N_DP_D+N_AP_A\ \Rightarrow\ 1{,}483 = 1(1{,}2)+1\,(P_A)\ \Rightarrow\ P_A=0{,}283\umm
+\end{align*}
+Se adopta una pasada de desbaste de $1{,}2$ mm y una de acabado de $0{,}283$ mm
+(dentro del intervalo 0,1--0,5 mm). El diámetro inicial del acabado es
+$D_{i,A}=35-2(1{,}2)=32{,}6$ mm.
+
+\textbf{Velocidad de giro y de corte.}
+\begin{align*}
+	n_D^{\text{ideal}} & =\frac{1000(300)}{\pi(35)}=2\,728\urpm\ \Rightarrow\ n_D=2\,700\urpm     \\
+	v_D                & =\frac{\pi(35)(2\,700)}{1000}=296{,}9\umpm                               \\
+	n_A^{\text{ideal}} & =\frac{1000(380)}{\pi(32{,}6)}=3\,710\urpm\ \Rightarrow\ n_A=3\,700\urpm \\
+	v_A                & =\frac{\pi(32{,}6)(3\,700)}{1000}=378{,}9\umpm
+\end{align*}
+Ambas velocidades quedan por debajo de las de la tabla. Se cumple la regla
+$v_D<v_A$, $a_D>a_A$, $n_D<n_A$.
+
+\textbf{Avance y velocidad lineal.} Con $a_D=0{,}30$ mm/rev y $a_A=0{,}10$ mm/rev:
+\begin{align*}
+	v_{L,D} & =a_Dn_D=0{,}30(2\,700)=810\ummmin \\
+	v_{L,A} & =a_An_A=0{,}10(3\,700)=370\ummmin
+\end{align*}
+
+\textbf{Tiempo de pasada.} Se mecaniza $L=44$ mm (41 mm de pieza más 3 mm del
+ancho del tronzador), con $y=2$ mm y, al ser $\omega=90^\circ$, $\Delta=0$:
+\[
+	t_D=\frac{44+2+0}{810}=0{,}0568\umin\ (3{,}4\ \text{s}),\qquad
+	t_A=\frac{44+2+0}{370}=0{,}1243\umin\ (7{,}5\ \text{s})
+\]
+
+\textbf{Caudal de viruta.}
+\begin{align*}
+	A_D & =\tfrac{\pi}{4}\left(35^2-32{,}6^2\right)=127{,}4\ \text{mm}^2      \\
+	Q_D & =810(127{,}4)=103\,213\ \text{mm}^3/\text{min}=103{,}2\ucmmin       \\
+	A_A & =\tfrac{\pi}{4}\left(32{,}6^2-32{,}034^2\right)=28{,}7\ \text{mm}^2 \\
+	Q_A & =370(28{,}7)=10\,632\ \text{mm}^3/\text{min}=10{,}6\ucmmin
+\end{align*}
+
+\textbf{Rugosidad teórica del acabado} (ec.~\ref{eq:Ra}, $r_\varepsilon=0{,}4$
+mm):
+$R_a\approx 0{,}10^2/(32\cdot0{,}4)=0{,}00078$ mm $=0{,}78$ \textmu m, inferior
+al
+límite de 1,6 \textmu m.
+
+\subsubsection{Mandrinado o cilindrado interior (OP 50)}
+
+El agujero parte de la broca ($D_i=22$ mm) y debe llegar al centro de la zona
+H7 ($25{,}000$ a $25{,}021$ mm): $D_f=25{,}010$ mm.
+\begin{align*}
+	p_T & =\frac{25{,}010-22}{2}=1{,}505\umm                                                   \\
+	p_T & =N_DP_D+N_AP_A\ \Rightarrow\ 1{,}505=2(0{,}6)+1\,(P_A)\ \Rightarrow\ P_A=0{,}305\umm
+\end{align*}
+Los diámetros resultantes son $22\to23{,}2\to24{,}4\to25{,}010$ mm, con
+$D_{i,A}=24{,}4$ mm. Con la tabla, las rpm ideales serían 4\,341 rpm
+(desbaste) y 4\,957 rpm (acabado), que superan el máximo de la máquina
+(4\,000 rpm) y exigirían una barra más rígida. Se adopta $n_D=3\,000$ rpm, para
+dejar margen de rigidez a la barra y de evacuación de viruta, y $n_A=4\,000$ rpm:
+\[
+	v_D=\frac{\pi(22)(3\,000)}{1000}=207{,}3\umpm,\qquad
+	v_A=\frac{\pi(24{,}4)(4\,000)}{1000}=306{,}6\umpm
+\]
+Con $a_D=0{,}15$ mm/rev y $a_A=0{,}08$ mm/rev (menores que en el exterior por
+el voladizo de la barra): $v_{L,D}=450$ mm/min y $v_{L,A}=320$ mm/min. Con $L=42$
+mm (se mandrina hasta pasar el plano de tronzado), $y=2$ mm y $\Delta=0$:
+\[
+	t_D=N_D\left(\frac{42+2}{450}\right)=2(0{,}0978)=0{,}1956\umin,\qquad
+	t_A=\frac{42+2}{320}=0{,}1375\umin
+\]
+\textbf{Caudal de viruta:} primera pasada de desbaste
+$A=\frac{\pi}{4}(23{,}2^2-22^2)=42{,}6$ mm$^2$ y $Q=450(42{,}6)=19{,}2\ucmmin$;
+segunda pasada $A=44{,}9$ mm$^2$ y $Q=20{,}2\ucmmin$; acabado
+$A=\frac{\pi}{4}(25{,}010^2-24{,}4^2)=23{,}7$ mm$^2$ y
+$Q=320(23{,}7)=7{,}6\ucmmin$. Rugosidad teórica del acabado:
+$R_a\approx0{,}08^2/(32\cdot0{,}4)=0{,}5$ \textmu m $<0{,}8$ \textmu m.
+
+\subsubsection{Punto de centro y taladrado (OP 30 y 40)}
+
+Ambas herramientas son de acero rápido, por lo que se usa $v=30$ m/min.
+\begin{align*}
+	n      & =\frac{1000(30)}{\pi(22)}=434\urpm\ \Rightarrow\ n=430\urpm                      \\
+	v      & =\frac{\pi(22)(430)}{1000}=29{,}7\umpm                                           \\
+	\Delta & =\frac{22/2}{\tan 59^\circ}=6{,}61\umm,\qquad v_L=0{,}20(430)=86\ummmin          \\
+	t      & =\frac{L+y+\Delta}{a\,n}=\frac{46+2+6{,}61}{86}=0{,}635\umin\ (38{,}1\ \text{s})
+\end{align*}
+La profundidad de 46 mm asegura que el agujero pase el plano de tronzado (a 41 a
+44 mm de la cara). El caudal de viruta del taladrado es
+$Q=v_L\,\frac{\pi}{4}d^2=86(380{,}1)=32{,}7\ucmmin$. Para el punto de centro
+($\varnothing4$ mm): $n=1000(30)/(\pi\cdot4)=2\,387\to2\,400$ rpm, $a=0{,}10$
+mm/rev, $L=5$ mm, $y=2$ mm: $t=7/(0{,}10\cdot2\,400)=0{,}029$ min.
+
+\subsubsection{Refrentados (OP 20 y 100)}
+
+En cada cara se quitan $1{,}0$ mm axiales: $0{,}7$ mm en desbaste y $0{,}3$ mm en
+acabado. En el refrentado de la cara 1 (barra maciza) la herramienta recorre
+$L=D/2=17{,}5$ mm; para que $v\le380$ m/min en el acabado se adopta
+$n_A=3\,400$ rpm ($v=373{,}8$ m/min).
+\[
+	t_D=\frac{17{,}5+2+0}{0{,}30(2\,700)}=0{,}0241\umin,\qquad
+	t_A=\frac{17{,}5+2+0}{0{,}10(3\,400)}=0{,}0574\umin
+\]
+En la cara 2 la pieza ya es hueca y la herramienta solo recorre la pared:
+$L=(32{,}034-25{,}010)/2=3{,}512$ mm, con $n_D=2\,700$ y $n_A=3\,700$ rpm:
+\[
+	t_D=\frac{3{,}512+2}{810}=0{,}0068\umin,\qquad
+	t_A=\frac{3{,}512+2}{370}=0{,}0149\umin
+\]
+La longitud final queda $41-0{,}7-0{,}3=40{,}0$ mm, centrada en $40\pm0{,}1$.
+
+\subsubsection{Tronzado (OP 80)}
+
+Se corta una pared de $L=3{,}512$ mm (pieza hueca), con $y=2$ mm, $\Delta=0$,
+$a=0{,}08$ mm/rev y $n=2\,700$ rpm ($v=271{,}7$ m/min en el diámetro exterior):
+\[
+	t=\frac{3{,}512+2+0}{0{,}08(2\,700)}=\frac{5{,}512}{216}=0{,}0255\umin\ (1{,}5\ \text{s})
+\]
+
+\subsubsection{Chaflanes (OP 70 y 110)}
+
+Cada chaflán es una pasada recta a $45^\circ$ de longitud $\ell=\sqrt2\,c$. Con
+$y=1$ mm: exterior $c=1$ mm, $a=0{,}10$ mm/rev, $n=3\,700$ rpm,
+$t=(1{,}414+1)/370=0{,}0065$ min; interior $c=0{,}5$ mm, $a=0{,}08$ mm/rev,
+$n=4\,000$ rpm, $t=(0{,}707+1)/320=0{,}0053$ min. Por cara resultan $0{,}012$
+min
+y entre ambas caras $0{,}024$ min.
+
+\subsubsection{Resumen de condiciones y tiempos}
+
+La Tabla~\ref{tab:resumen} reúne los resultados de las operaciones de corte.
+
+\begin{table}[!htb]
+	\centering
+	\caption{Resumen de condiciones de corte, caudales y tiempos}\label{tab:resumen}
+	\footnotesize
+	\setlength{\tabcolsep}{3pt}
+	\rowcolors{2}{white}{lightblue}
+	\begin{tabular}{l c c c c r}
+		\rowcolor{darkblue}
+		\encab{Pasada}                   & \encab{$v$ (m/min)} & \encab{$n$ (rpm)} & \encab{$a$ (mm/rev)} & \encab{$Q$ (cm$^3$/min)} & \encab{$t$ (min)} \\
+		Refrentado cara 1, desbaste      & 296,9               & 2\,700            & 0,30                 & ---                      & 0,024             \\
+		Refrentado cara 1, acabado       & 373,8               & 3\,400            & 0,10                 & ---                      & 0,057             \\
+		Punto de centro                  & 30,2                & 2\,400            & 0,10                 & ---                      & 0,029             \\
+		Taladrado $\varnothing22$        & 29,7                & 430               & 0,20                 & 32,7                     & 0,635             \\
+		Mandrinado, desbaste (2 pasadas) & 207,3               & 3\,000            & 0,15                 & 19,2 / 20,2              & 0,196             \\
+		Mandrinado, acabado              & 306,6               & 4\,000            & 0,08                 & 7,6                      & 0,138             \\
+		Cilindrado exterior, desbaste    & 296,9               & 2\,700            & 0,30                 & 103,2                    & 0,057             \\
+		Cilindrado exterior, acabado     & 378,9               & 3\,700            & 0,10                 & 10,6                     & 0,124             \\
+		Chaflanes (cara 1)               & ---                 & ---               &
+		---                              & ---                 & 0,012                                                                                   \\
+		Tronzado                         & 271,7               & 2\,700            & 0,08                 & ---                      & 0,026             \\
+		Refrentado cara 2, desbaste      & 271,7               & 2\,700            & 0,30                 & ---                      & 0,007             \\
+		Refrentado cara 2, acabado       & 372,4               & 3\,700            & 0,10                 & ---                      & 0,015             \\
+		Chaflanes (cara 2)               & ---                 & ---               & ---                  & ---                      & 0,012             \\
+		\midrule
+		\textbf{Tiempo de corte total}   &                     &                   &                      &                          &
+		\textbf{1,331}                                                                                                                                   \\
+	\end{tabular}
+\end{table}
+
+\textbf{Tiempo de ciclo estimado.} A los $1{,}331$ min de corte se suman los
+tiempos auxiliares estimados: carga y descarga (2 sujeciones $\times$ 0,75 min
+$=1{,}5$ min), 7 cambios de herramienta ($\times$ 0,10 min $=0{,}7$ min) e
+inspección (1,0 min). El ciclo es
+\[
+	t_{\text{ciclo}}=1{,}331+1{,}5+0{,}7+1{,}0\approx4{,}53\umin
+	\ \Rightarrow\ \frac{60}{4{,}53}\approx13\ \text{piezas/h}
+\]
+
+\subsection{Registro gráfico del proceso}
+
+Al ser un trabajo teórico, las imágenes de la Figura~\ref{fig:fotos} son
+referenciales (se reemplazarán por fotos o ilustraciones del grupo, indicando la
+fuente).
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}[t]{0.48\linewidth}\centering
+		\image[0.97][3.6cm]{img/proc_refrentado.jpg}{Refrentado de la cara 1 de la barra}\\[2pt]
+		{\sffamily\scriptsize (a) Refrentado}
+	\end{minipage}\hfill
+	\begin{minipage}[t]{0.48\linewidth}\centering
+		\image[0.97][3.6cm]{img/proc_taladrado.jpg}{Taladrado con broca $\varnothing22$}\\[2pt]
+		{\sffamily\scriptsize (b) Taladrado}
+	\end{minipage}\\[8pt]
+	\begin{minipage}[t]{0.48\linewidth}\centering
+		\image[0.97][3.6cm]{img/proc_mandrinado.jpg}{Mandrinado con barra de inserto}\\[2pt]
+		{\sffamily\scriptsize (c) Mandrinado}
+	\end{minipage}\hfill
+	\begin{minipage}[t]{0.48\linewidth}\centering
+		\image[0.97][3.6cm]{img/proc_cilindrado.jpg}{Cilindrado exterior de acabado}\\[2pt]
+		{\sffamily\scriptsize (d) Cilindrado exterior}
+	\end{minipage}\\[8pt]
+	\begin{minipage}[t]{0.48\linewidth}\centering
+		\image[0.97][3.6cm]{img/proc_tronzado.jpg}{Tronzado de la pieza}\\[2pt]
+		{\sffamily\scriptsize (e) Tronzado}
+	\end{minipage}\hfill
+	\begin{minipage}[t]{0.48\linewidth}\centering
+		\image[0.97][3.6cm]{img/buje_terminado.jpg}{Buje terminado y tapón pasa/no pasa}\\[2pt]
+		{\sffamily\scriptsize (f) Buje terminado}
+	\end{minipage}
+	\caption{Secuencia de operaciones del buje (imágenes
+		referenciales).}\label{fig:fotos}
+\end{figure}
+
+\newpage
+
+% ===== 4. RESULTADOS =================================================
+\section{RESULTADOS}
+
+Como el trabajo es teórico, los resultados son los valores que el proceso
+planificado debe producir y la comprobación analítica de que estos cumplen el
+plano. No se incluyen lecturas de instrumentos reales; la tabla de inspección
+está diseñada para que el grupo pueda añadir una columna de ``valor medido''
+cuando se fabrique la pieza.
+
+\subsection{Tabla de mediciones}
+
+La Tabla~\ref{tab:pasadas} recoge el diámetro teórico que debe medirse después
+de
+cada pasada, calculado con las profundidades de la sección~\ref{sec:calculos}.
+En el agujero se mide después de cada pasada de desbaste solo si se desea
+controlar el proceso; la medición obligatoria es la del acabado.
+
+\begin{table}[!htb]
+	\centering
+	\caption{Dimensiones teóricas esperadas después de cada pasada}\label{tab:pasadas}
+	\small
+	\rowcolors{2}{white}{lightblue}
+	\begin{tabular}{l l c c}
+		\rowcolor{darkblue}
+		\encab{Característica} & \encab{Pasada}              & \encab{Prof. radial (mm)} & \encab{Dimensión (mm)} \\
+		Agujero                & Broca                       & ---                       & 22,000                 \\
+		Agujero                & Desbaste 1                  & 0,6                       & 23,200                 \\
+		Agujero                & Desbaste 2                  & 0,6                       & 24,400                 \\
+		Agujero                & \textbf{Acabado}            & 0,305
+		                       & \textbf{25,010}                                                                  \\
+		Exterior               & Barra                       & ---
+		                       & 35,000                                                                           \\
+		Exterior               & Desbaste                    & 1,2
+		                       & 32,600                                                                           \\
+		Exterior               & \textbf{Acabado}            & 0,283
+		                       & \textbf{32,034}
+		\\
+		Longitud               & Tronzado                    & ---
+		                       & 41,000                                                                           \\
+		Longitud               & Refrentado desbaste         & 0,7 (axial)
+		                       & 40,300                                                                           \\
+		Longitud               & \textbf{Refrentado acabado} & 0,3 (axial)
+		                       & \textbf{40,000}                                                                  \\
+	\end{tabular}
+\end{table}
+
+La Tabla~\ref{tab:inspeccion} es el plan de inspección. La columna final es la
+relación entre el ancho de la tolerancia y la resolución del instrumento: el
+criterio habitual en metrología dimensional es que el instrumento resuelva al
+menos una décima parte de la tolerancia (relación $\ge10$).
+
+\begin{table}[!htb]
+	\centering
+	\caption{Plan de inspección y límites de aceptación}\label{tab:inspeccion}
+	\footnotesize
+	\setlength{\tabcolsep}{3pt}
+	\rowcolors{2}{white}{lightblue}
+	\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.1cm} c c >{\raggedright\arraybackslash}X c c}
+		\rowcolor{darkblue}
+		\encab{Característica}                                      & \encab{Límites (mm)}              & \encab{Objetivo (mm)} & \encab{Instrumento}                            & \encab{Resol. (mm)} & \encab{Tol./resol.} \\
+		$\varnothing25$ H7                                          & 25,000 -- 25,021                  & 25,010                &
+		Micrómetro de interiores de 3 puntos; tapón pasa/no pasa H7 & 0,001                             & 21                                                                                                                 \\
+		$\varnothing32$ p6                                          & 32,026 -- 32,042                  & 32,034                & Micrómetro de exteriores 25--50 mm             & 0,001               & 16                  \\
+		Longitud 40                                                 & 39,9 -- 40,1                      & 40,0                  & Vernier                                        & 0,02                & 10                  \\
+		Coaxialidad                                                 & $\le0{,}02$                       & ---                   & Comparador de carátula sobre mandril expansivo & 0,001               & 20                  \\
+		Ra agujero / exterior                                       & $\le0{,}8$ / $\le1{,}6$ \textmu m & ---                   & Rugosímetro                                    & ---                 & ---                 \\
+	\end{tabularx}
+\end{table}
+
+Aquí se aprecia la conexión con el laboratorio de metrología: un vernier de
+0,05 mm de resolución habría dado solo una relación de 0,42 sobre la zona H7
+(21 \textmu m), por lo que no sirve para verificar este agujero. Solo el
+micrómetro de interiores (o el calibre pasa/no pasa) es adecuado.
+
+\subsection{Verificación de tolerancias}
+
+\textbf{Ajuste H7/h6 entre el agujero y el eje.} Con $\varnothing25$ H7
+($ES=+21$ \textmu m, $EI=0$) y h6 ($es=0$, $ei=-13$ \textmu m):
+\begin{align*}
+	D_{\max} & =25{,}021\umm,          & D_{\min} & =25{,}000\umm \\
+	d_{\max} & =25{,}000\umm,          & d_{\min} & =24{,}987\umm \\
+	J_{\max} & =ES-ei=21-(-13)=34\uum, & J_{\min} & =EI-es=0-0=0
+\end{align*}
+Es un ajuste con juego, que va de 0 a 34 \textmu m (Figura~\ref{fig:zonas}). Si el
+agujero se mecaniza en el valor objetivo de $25{,}010$ mm, el juego queda entre
+$25{,}010-25{,}000=10$ \textmu m y $25{,}010-24{,}987=23$ \textmu m, es decir,
+siempre positivo, lo que protege contra el agarrotamiento aunque el eje salga
+en cualquier punto de su zona.
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[x=0.9cm,y=0.115cm,
+			lbl/.style={font=\sffamily\scriptsize,text=darkblue}]
+		\draw[->,line width=0.5pt] (-0.4,-18)--(-0.4,26) node[above,lbl] {\textmu m};
+		\foreach \yy in {-13,0,10,21}{
+				\draw (-0.5,\yy)--(-0.3,\yy); \node[lbl,anchor=east] at (-0.5,\yy) {\yy};}
+		\draw[dash dot,line width=0.5pt,color=black!70] (-0.4,0)--(10.8,0)
+		node[right,lbl,align=left] {línea de cero\\$\varnothing25{,}000$};
+		\filldraw[fill=lightblue,draw=darkblue,line width=0.8pt] (0.8,0) rectangle (3.8,21);
+		\node[lbl,align=center] at (2.3,29.5) {Agujero H7\\[-1pt]$ES=+21$, $EI=0$};
+		\draw[dashed,color=mediumblue,line width=0.6pt] (0.8,10)--(3.8,10);
+		\node[lbl,fill=lightblue,inner sep=1pt] at (2.3,14) {objetivo CNC $+10$};
+		\filldraw[fill=lightblue,draw=darkblue,line width=0.8pt] (5.6,-13) rectangle (8.6,0);
+		\node[lbl,align=center] at (7.1,-23) {Eje h6\\[-1pt]$es=0$, $ei=-13$};
+		\draw[<->,>=Stealth,line width=0.5pt] (9.6,-13)--(9.6,21);
+		\node[lbl,rotate=90,anchor=south,xshift=-2pt] at (9.6,4) {$J_{\max}=34\
+				\mu$m};
+	\end{tikzpicture}
+	\caption{Zonas de tolerancia del ajuste $\varnothing25$ H7/h6 (valores en
+		\textmu m respecto de la medida nominal).}\label{fig:zonas}
+\end{figure}
+
+\textbf{Ajuste exterior H7/p6.} Con el alojamiento $\varnothing32$ H7
+($32{,}000$ a $32{,}025$ mm) y el buje p6 ($32{,}026$ a $32{,}042$ mm) el
+aprieto
+va de $32{,}026-32{,}025=1$ \textmu m a $32{,}042-32{,}000=42$ \textmu m. Con el
+objetivo de $32{,}034$ mm queda entre 9 y 34 \textmu m, siempre positivo, de
+modo
+que el buje no gira en la carcasa.
+
+\textbf{Longitud, rugosidad y geometría.} La longitud nominal resulta
+$41-0{,}7-0{,}3=40{,}0$ mm, centrada en la banda de $\pm0{,}1$ mm. Las
+rugosidades teóricas de acabado ($0{,}5$ \textmu m en el agujero y $0{,}78$ \textmu m
+en el exterior) son menores que los límites de $0{,}8$ y $1{,}6$ \textmu m. La
+coaxialidad se obtiene al mecanizar agujero y exterior sin soltar la barra, de
+modo que depende solo de la precisión del husillo y del conjunto, no de un
+reposicionado.
+
+\subsection{Análisis de errores}
+
+El diámetro del agujero H7 admite una dispersión total de 21 \textmu m, es decir,
+$\pm10{,}5$ \textmu m alrededor del objetivo. La Tabla~\ref{tab:errores} estima las
+principales fuentes de error \emph{diametral} del mandrinado de acabado.
+
+\begin{table}[!htb]
+	\centering
+	\caption{Presupuesto de error estimado del agujero $\varnothing25$ H7}\label{tab:errores}
+	\small
+	\rowcolors{2}{white}{lightblue}
+	\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{4.0cm} X r}
+		\rowcolor{darkblue}
+		\encab{Fuente}                       & \encab{Estimación}                                                                                                                                                                                      & \encab{Error diam. (\textmu m)} \\
+		Dilatación térmica                   & $\alpha D\Delta T=18\times10^{-6}(25)(5)$, con $\Delta T=5$ K entre mecanizado y medición                                                                                                               & 2,25                            \\
+		Deflexión de la barra                & $F_c=k_sa\,p=700(0{,}08)(0{,}305)\approx17$ N; $F_r\approx0{,}4F_c\approx7$ N; $\delta=\dfrac{F_rL^3}{3EI}=0{,}73$ \textmu m con barra de acero $\varnothing16$, voladizo de 60 mm; diámetro $=2\delta$ & 1,5                             \\
+		Desgaste de la herramienta           & 3 \textmu m de desgaste radial entre correcciones (supuesto); afecta dos veces al diámetro                                                                                                              & 6,0                             \\
+		Incertidumbre de medición            & Micrómetro de interiores de 3 puntos (supuesto)                                                                                                                                                         & 3,0                             \\
+		\midrule
+		\textbf{Suma cuadrática (RSS)}       & $\sqrt{2{,}25^2+1{,}5^2+6^2+3^2}$                                                                                                                                                                       & \textbf{7,2}                    \\
+		\textbf{Suma aritmética (peor caso)} & $2{,}25+1{,}5+6+3$                                                                                                                                                                                      & \textbf{12,75}                  \\
+	\end{tabularx}
+\end{table}
+
+Lo que sale de la tabla es esto:
+\begin{itemize}
+	\item \textbf{El desgaste de la herramienta domina el presupuesto.} Un
+	      desgaste radial de apenas 3 \textmu m cambia el diámetro 6 \textmu m,
+	      casi un tercio de toda la zona H7. Es la razón de fondo por la que el
+	      objetivo se fija en el centro de la zona y no cerca de su límite
+	      inferior.
+	\item \textbf{El error típico cabe en la tolerancia, el peor caso no.} La
+	      combinación cuadrática (7,2 \textmu m) deja un margen de 3,3 \textmu m
+	      respecto de la semibanda de 10,5 \textmu m; la suma aritmética
+	      (12,75 \textmu m) la supera. Por tanto, el proceso es viable pero
+	      \emph{no} es robusto sin control: hace falta medir y corregir.
+	\item \textbf{El exterior p6 tiene menos margen.} Con $\alpha D\Delta T=2{,}9$
+	      \textmu m, desgaste de 6 \textmu m y medición de 3 \textmu m, la suma
+	      cuadrática es 7,3 \textmu m frente a una semibanda de 8 \textmu m
+	      (IT6 = 16 \textmu m): el margen es de solo 0,7 \textmu m.
+	\item \textbf{Otras fuentes no cuantificadas:} deformación del buje por la
+	      presión de las mordazas en la sujeción 2 (no afecta al agujero, que ya
+	      está terminado, pero sí a la planitud de la cara 2); vibración de la
+	      barra de mandrinar; viruta atrapada en el agujero; y rebabas del
+	      tronzado.
+\end{itemize}
+
+\textbf{Estrategia de control propuesta.} Mecanizar una primera pieza y medirla
+con micrómetro de interiores; corregir el desplazamiento de herramienta
+(\emph{offset}) con la diferencia entre el valor medido y el objetivo de
+25,010 mm; medir una pieza cada cierto número de piezas y corregir el desgaste
+antes de que el diámetro se acerque a los límites; y verificar con el tapón
+pasa/no pasa H7 en el 100\,\% de las piezas.
+
+\subsection{Productividad y distribución del tiempo}
+
+El tiempo de corte total es de 1,331 min (79,8 s) y el ciclo estimado, de unos
+4,53 min por pieza. La Figura~\ref{fig:tiempos} muestra que el taladrado
+consume casi la mitad del tiempo de corte (47,7\,\%) y el mandrinado otro cuarto
+(25,0\,\%): entre los dos suman el 72,7\,\%. Las operaciones de torneado exterior,
+refrentado, tronzado y chaflanes, que son las del curso, ocupan una fracción
+pequeña del ciclo.
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[xbar,/pgf/number format/use comma,width=0.8\linewidth,height=6.6cm,
+				symbolic y coords={A,B,C,D,E,F,G,H},ytick=data,y dir=reverse,
+				yticklabels={Taladrado,Mandrinado,Cilindrado ext.,Refrentado cara 1,Punto de centro,Tronzado,Chaflanes,Refrentado cara 2},
+				xmin=0,xmax=0.82,bar width=7pt,enlarge y limits=0.08,
+				xlabel={Tiempo de corte (min)},
+				xmajorgrids,grid style={borderblue!70},
+				label style={font=\sffamily\small},tick label style={font=\sffamily\small},
+				nodes near coords,
+				nodes near coords style={font=\sffamily\scriptsize,/pgf/number format/.cd,use comma,fixed,precision=3,fixed zerofill},
+				axis x line*=bottom,axis y line*=left]
+			\addplot[fill=mediumblue,draw=darkblue] coordinates {(0.635,A) (0.333,B)
+					(0.181,C) (0.081,D) (0.029,E) (0.026,F) (0.024,G) (0.022,H)};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Distribución del tiempo de corte por operación (total 1,331 min).}\label{fig:tiempos}
+\end{figure}
+
+El material de partida también pesa: por pieza se consume $1+41+3=45$ mm de
+barra
+$\varnothing35$ ($V\approx43{,}3$ cm$^3$, $\approx0{,}38$ kg), de los cuales
+queda en la pieza $12{,}5$ cm$^3$: un aprovechamiento del $29\,\%$. El resto es
+viruta, en su mayor parte el núcleo del agujero.
+
+% ===== 5. CONCLUSIONES ===============================================
+\newpage
+\section{CONCLUSIONES}
+
+\subsection{Logros y dificultades}
+
+\begin{itemize}
+	\item Se definió una secuencia completa de fabricación del buje en dos
+	      sujeciones y once operaciones, con las fórmulas del curso aplicadas a
+	      cada una (velocidad de corte, rpm, avance, número de pasadas, caudal de
+	      viruta y tiempos). El tiempo de corte resultó de 1,331 min y el ciclo
+	      estimado de 4,53 min por pieza.\\[-10pt]
+	\item El ajuste H7/h6 queda garantizado en el papel: juego entre 0 y 34 \textmu m,
+	      que con el objetivo de $25{,}010$ mm se reduce a 10--23 \textmu m, siempre
+	      positivo. Los instrumentos propuestos cumplen la relación
+	      tolerancia/resolución de al menos 10:1.\\[-10pt]
+	\item Hacer agujero y exterior en la misma sujeción de la barra asegura la
+	      coaxialidad sin depender de un reposicionado, lo que justifica el uso de
+	      un torno CNC frente a uno paralelo.\\[-10pt]
+	\item La principal dificultad es de \emph{control}, no de cálculo: el
+	      presupuesto de error muestra que el proceso cumple H7 en el caso típico
+	      (7,2 \textmu m frente a 10,5 \textmu m), pero no en el peor caso
+	      (12,75 \textmu m), y que el desgaste de la herramienta es la fuente
+	      dominante. El exterior p6 tiene un margen aún menor.\\[-10pt]
+	\item La tabla de velocidades del curso (300 y 380 m/min en bronce con
+	      carburo) exige 4\,300 a 5\,000 rpm en el agujero de $\varnothing22$ a
+	      $\varnothing25$ mm, por encima del límite supuesto de la máquina. Hubo que
+	      reducir las rpm y apoyarse en el criterio de rigidez de la barra.\\[-10pt]
+	\item Limitación del trabajo: todos los valores son teóricos; la
+	      maquinabilidad, el desgaste, las rigideces y los tiempos auxiliares son
+	      supuestos que solo una prueba real puede confirmar.
+\end{itemize}
+
+\subsection{Mejoras propuestas}
+
+\begin{itemize}
+	\item \textbf{Usar barra hueca (tubo de bronce) en lugar de barra maciza.} Se
+	      elimina el taladrado ($48\,\%$ del tiempo de corte) y se aprovecha mucho
+	      más material; es la mejora de mayor impacto.\\[-10pt]
+	\item \textbf{Escariar el agujero con un escariador H7} en lugar de acabarlo
+	      con barra: el diámetro lo fija directamente la herramienta y no depende
+	      de compensar un filo que se desgasta, que es la mayor contribución del
+	      presupuesto de errores.\\[-10pt]
+	\item \textbf{Taladrar con ciclo de picado y refrigerante} para evacuar la
+	      viruta en un agujero de profundidad $2{,}1\,d$, y revisar el avance de la
+	      broca si el tiempo de ciclo es crítico.\\[-10pt]
+	\item \textbf{Velocidad de corte constante (G96) en los refrentados}, para que
+	      la velocidad de corte no caiga hacia el centro; los cálculos de este
+	      trabajo usan rpm fijas, que son conservadoras en tiempo.\\[-10pt]
+	\item \textbf{Compensación automática del desgaste} mediante palpador de
+	      herramienta o medición en máquina, para reducir la contribución del
+	      desgaste al error.\\[-10pt]
+	\item \textbf{Prever el cierre del agujero por el aprieto del montaje.} Al
+	      prensar un buje con aprieto en un alojamiento, su diámetro interior
+	      suele
+	      reducirse; si el ajuste H7/h6 es crítico se deja una sobremedida de
+	      acabado y se mandrina o escaría el agujero \emph{después} del montaje.
+	      \\[-10pt]
+	\item \textbf{Fabricar una pieza de prueba} y reemplazar los valores
+	      supuestos de desgaste, tiempos auxiliares y rigidez por valores medidos.
+\end{itemize}
+
+% ===== 6. ANEXOS =====================================================
+\newpage
+\section{ANEXOS}
+
+\subsection*{Anexo A. Tabla de velocidades de corte ($v$, m/min)}
+
+Fuente: material de clase de la Semana~4~\refbib{bib:clase}. Las filas utilizadas
+en este trabajo son las del bronce.
+
+\begin{table}[!htb]
+	\centering
+	\small
+	\rowcolors{3}{white}{lightblue}
+	\begin{tabular}{l c c c c}
+		\rowcolor{darkblue}
+		                             & \multicolumn{2}{c}{\encab{Acero rápido}} &
+		\multicolumn{2}{c}{\encab{Pastilla carburada}}
+		\\
+		\rowcolor{darkblue}
+		\encab{Material de la pieza} & \encab{Desbaste}                         &
+		\encab{Acabado}              &
+		\encab{Desbaste}             & \encab{Acabado}
+		\\
+		Acero 0,35 \%C               & 25                                       & 30
+		                             & 200                                      & 300                              \\
+		Acero 0,45 \%C               & 15                                       & 20
+		                             & 120                                      & 160                              \\
+		Acero extra duro             & 12                                       & 16
+		                             & 40                                       & 60                               \\
+		Hierro fundido maleable      & 20                                       & 25
+		                             & 70                                       & 85                               \\
+		Hierro fundido gris          & 15                                       & 20
+		                             & 65                                       & 95                               \\
+		Hierro fundido duro          & 10                                       & 15          & 30           & 50  \\
+		\textbf{Bronce}              & \textbf{30}                              & \textbf{40} & \textbf{300} &
+		\textbf{380}                                                                                               \\
+		Latón y cobre                & 40                                       & 50          & 350          & 400 \\
+		Aluminio                     & 60                                       & 90          & 500          & 700 \\
+		Fibra y ebonita              & 25                                       & 40
+		                             & 120                                      & 150                              \\
+	\end{tabular}
+\end{table}
+
+\subsection*{Anexo B. Nomenclatura}
+
+\begin{table}[!htb]
+	\centering
+	\small
+	\rowcolors{2}{white}{lightblue}
+	\begin{tabularx}{\linewidth}{c X c}
+		\rowcolor{darkblue}
+		\encab{Símbolo}       & \encab{Significado}                                              & \encab{Unidad} \\
+		$v$                   & Velocidad de corte
+		                      &
+		m/min                                                                                                     \\
+		$n$                   & Velocidad de giro del husillo
+		                      & rpm                                                                               \\
+		$D_i,\ D_f$           & Diámetro inicial y final de la pasada                            &
+		mm                                                                                                        \\
+		$a$                   & Avance por revolución                                            &
+		mm/rev                                                                                                    \\
+		$v_L$                 & Velocidad lineal o de avance                                     &
+		mm/min                                                                                                    \\
+		$Q$                   & Caudal de viruta                                                 & cm$^3$/min     \\
+		$A$                   & Área de la corona removida                                       &
+		mm$^2$                                                                                                    \\
+		$p_T$                 & Profundidad total radial a quitar                                & mm             \\
+		$N_D,\ N_A$           & Número de pasadas de desbaste y de acabado                       & ---            \\
+		$P_D,\ P_A$           & Profundidad de cada pasada de desbaste y de acabado              & mm             \\
+		$L$                   & Longitud mecanizada                                              & mm             \\
+		$y$                   & Retiro (aproximación) de la herramienta                          & mm             \\
+		$\omega,\ \Delta$     & Ángulo de posición y distancia adicional ($\tan\omega=p/\Delta$) & ($^\circ$), mm \\
+		$t_p,\ t_m$           & Tiempo de pasada y tiempo de maquinado                           & min            \\
+		$r_\varepsilon$       & Radio de punta de la herramienta                                 & mm             \\
+		$J_{\max},\ J_{\min}$ & Juego máximo y mínimo del ajuste                                 & \textmu m      \\
+	\end{tabularx}
+\end{table}
+
+\subsection*{Anexo C. Referencias}
+
+\begin{enumerate}[label={[\arabic*]},ref=\arabic*,leftmargin=2.2em,itemsep=5pt]
+	\item\label{bib:groover} Groover, M. P. (2007). \emph{Fundamentos de manufactura moderna:
+		      materiales, procesos y sistemas} (3\textdegree ed.). McGraw-Hill.
+	\item\label{bib:kalpakjian} Kalpakjian, S., \& Schmid, S. R. (2014). \emph{Manufactura, ingeniería y
+		      tecnología} (7\textdegree ed.). Pearson Educación.
+	\item\label{bib:iso286} International Organization for Standardization. (2010). \emph{ISO 286-1:2010
+		      Geometrical product specifications (GPS) --- ISO code system for tolerances on linear sizes
+		      --- Part 1: Basis of tolerances, deviations and fits}. ISO.
+	\item\label{bib:iso2768} International Organization for Standardization. (1989). \emph{ISO 2768-1:1989
+		      General tolerances --- Part 1: Tolerances for linear and angular dimensions without
+		      individual tolerance indications}. ISO.
+	\item\label{bib:astm} ASTM International. \emph{ASTM B505/B505M: Standard Specification for
+		      Copper-Base Alloy Continuous Castings} (alloy UNS C93200).
+	\item\label{bib:oberg} Oberg, E., Jones, F. D., Horton, H. L., \& Ryffel, H. H. (2020).
+	      \emph{Machinery's Handbook} (31\textdegree ed.). Industrial Press.
+	\item\label{bib:gum} Joint Committee for Guides in Metrology. (2008). \emph{Evaluation of
+		      measurement data --- Guide to the expression of uncertainty in measurement} (JCGM 100:2008).
+	      BIPM.
+	\item\label{bib:clase} Universidad Nacional Mayor de San Marcos. \emph{Semana 4: Procesos de
+		      remoción de torno}. Material de clase del curso Procesos de Manufactura.
+\end{enumerate}
+
+\end{document}

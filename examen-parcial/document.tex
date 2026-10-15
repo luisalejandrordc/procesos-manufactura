@@ -1,8 +1,6 @@
 \documentclass[12pt,a4paper]{article}
 
 \usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\renewcommand{\contentsname}{Contenido}
 \setlength{\parindent}{0pt}
 \emergencystretch=2em
 \usepackage{amsmath,amssymb}
@@ -49,13 +47,7 @@
 
 \newcommand{\ud}[1]{\,\mathrm{#1}}
 
-\title{\textbf{\color{azulprin}Procesos de Manufactura}\\[10pt]
-\large Resumen de estudio -- Semanas 1 a 4}
-\author{Luis Alejandro Rey de Castro}
-\date{}
-
 \begin{document}
-\maketitle
 \thispagestyle{fancy}
 
 % =====================================================================
@@ -345,6 +337,8 @@ Poros, grietas e inclusiones. En piezas fundidas aparecen además
 \textbf{rechupes}. Las grietas pueden ser \textbf{macrogrietas} o
 \textbf{microgrietas}. Las inclusiones son partículas de otro material
 incorporadas durante el procesamiento.
+
+\newpage
 
 % =====================================================================
 \section{Semana 2: Dimensiones, tolerancias y superficies}
@@ -795,6 +789,8 @@ superficie:
 	      componentes del material base.
 \end{description}
 
+\newpage
+
 % =====================================================================
 \section{Semana 3: Procesos de remoción con torno}
 % =====================================================================
@@ -806,6 +802,10 @@ superficie:
 
 \textbf{Partes del torno CNC:} \textbf{plato}, \textbf{mordazas} (sujetan la
 pieza) y \textbf{torreta} (porta las herramientas), además del panel de control.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.8\linewidth]{img/torno-cnc.png}
+\end{figure}
 
 \textbf{Partes del torno paralelo:}
 \begin{figure}[h!]
@@ -835,27 +835,39 @@ pieza) y \textbf{torreta} (porta las herramientas), además del panel de control
 \end{enumerate}
 
 \subsection{Procesos de torneado}
+
+\textbf{Herramientas} (cada proceso tiene su portaherramienta/inserto):
+cilindrado, mandrilado, roscado, ranurado y tronzado.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.5\linewidth]{img/herramientas.png}
+\end{figure}
+
 \begin{enumerate}
 	\item \textbf{Cilindrado exterior:} operación para dar forma exterior y
 	      \textbf{reducir el diámetro} de la barra del material.
 	\item \textbf{Cilindrado interior (mandrinado):} realizar cilindros o conos
 	      interiores y ranuras interiores en piezas agujereadas.
-	\item \textbf{Refrentado:} mecanizar una \textbf{superficie plana
-		      perpendicular al eje de giro}.
-	\item \textbf{Roscado:} hacer \textbf{varias pasadas de corte} a lo largo de
-	      toda la longitud de la rosca.
-	\item \textbf{Ranurado:} abrir ranuras o canales en las piezas.
-	\item \textbf{Tronzado:} \textbf{seccionamiento} de la barra o de una pieza
-	      con una herramienta afilada llamada \emph{tronzadora}.
-	\item \textbf{Moleteado:} producir una \textbf{superficie áspera o rugosa}
-	      (agarre); se usan \emph{moletas} como herramienta.
+	\item \textbf{Refrentado:} la herramienta de corte avanza en dirección
+	      perpendicular al eje de rotación de la pieza. Mientras la pieza gira en
+	      el husillo, el buril elimina una fina capa de material en la cara
+	      frontal para dejarla completamente plana.
+	\item \textbf{Roscado:} proceso de mecanizado por arranque de viruta que sirve
+	      para tallar un filete helicoidal (exterior o interior) en una pieza
+	      cilíndrica mediante la sincronización del giro de la pieza y el avance
+	      del carro.
+	\item \textbf{Ranurado:} consiste en abrir ranuras o canales en las piezas.
+	\item \textbf{Tronzado:} \textbf{seccionamiento/corte} de la barra o de una
+	      pieza con una herramienta afilada llamada \emph{tronzadora}.
+	\item \textbf{Moleteado:} es un proceso de conformado en frío (sin arranque de
+	      viruta) que imprime un patrón rugoso o texturizado sobre la superficie
+	      cilíndrica de una pieza para mejorar el agarre manual o el ajuste por
+	      fricción; se usan \emph{moletas} como herramienta.
 	\item \textbf{Cónico:} generar superficies cónicas.
 	\item \textbf{Forma:} generar perfiles según la forma de la
 	      herramienta/trayectoria.
 \end{enumerate}
-
-\textbf{Herramientas} (cada proceso tiene su portaherramienta/inserto):
-cilindrado, mandrilado, roscado, ranurado y tronzado.
 
 \subsection{Desbaste vs.\ acabado}
 \begin{center}
@@ -894,7 +906,7 @@ acabado).
 \begin{formu}[1. Velocidad de corte]
 	\[ v = n\left(\frac{D_i}{2}\right) \]
 	$v$ = velocidad de corte (m/min); $n$ = velocidad de giro o angular del chuck
-	(rev/min = rpm), con 1 rev $= 2\pi$; $D_i$ = diámetro inicial (mm).\\
+	(rev/min = rpm), con 1 rev $= 2\pi$; $D_i$ = diámetro inicial (m).\\
 	En la práctica: $v = \dfrac{\pi\, D_i\, n}{1000}$ con $D_i$ en mm y $v$ en
 	m/min
 	(el factor $2\pi$ convierte revoluciones a radianes y el 1000 pasa mm a m).
@@ -917,7 +929,8 @@ acabado).
 
 \begin{formu}[4. Profundidad de corte o de pasada]
 	\[ p_T = \frac{D_i - D_f}{2} \qquad\qquad p_T = N_D P_D + N_A P_A \]
-	$p_T$ = profundidad total; $N_A$, $N_D$ = número de pasadas de acabado y de
+	$p_T$ = profundidad total; $N_A$, $N_D$ = número de pasadas de acabado ($N_A =
+		0$ si no se especifica) y de
 	desbaste; $P_D$, $P_A$ = profundidad de desbaste y de acabado. \textbf{El
 		número
 		de pasadas debe ser entero.}\\
@@ -929,7 +942,7 @@ acabado).
 	\[ t_p = \frac{L + y + \Delta}{v_L} = \frac{L + y + \Delta}{a\cdot n} \]
 	$L$ = longitud a mecanizar; $y$ = retiro de cuchilla (1--3 mm); $\Delta$ =
 	distancia por efecto del ángulo de posición $\omega$, con $\tan\omega =
-		p/\Delta$.\\
+		p/\Delta$, $p$ = profundidad de pasada.\\
 	Si $\omega = 45^\circ \Rightarrow \Delta = p$; si $\omega = 90^\circ
 		\Rightarrow \Delta = 0$.
 \end{formu}
@@ -940,61 +953,18 @@ acabado).
 	se suman los tiempos de cada etapa: $t_m = t_D + t_A$.
 \end{formu}
 
-\begin{table}[H]
-	\centering
-	\small
-	\caption{Tabla de velocidades de corte $v$ (m/min)}
-	\vspace{10pt}
-	\begin{tabular}{@{}lcccc@{}}
-		\toprule
-		                          & \multicolumn{2}{c}{\textbf{Acero rápido}} &
-		\multicolumn{2}{c}{\textbf{Pastilla carburada}}
-		\\
-		\textbf{Material del eje} & Desbaste                                  &
-		Acabado                   & Desbaste                                  &
-		Acabado
-		\\
-		\midrule
-		Acero 0.35 \%C            & 25                                        & 30
-		                          & 200                                       & 300
-		\\
-		Acero 0.45 \%C            & 15                                        & 20
-		                          & 120                                       & 160
-		\\
-		Acero extra duro          & 12                                        & 16
-		                          & 40                                        & 60
-		\\
-		Hierro fundido maleable   & 20                                        & 25
-		                          & 70                                        & 85
-		\\
-		Hierro fundido gris       & 15                                        & 20
-		                          & 65                                        & 95
-		\\
-		Hierro fundido duro       & 10                                        & 15
-		                          & 30                                        & 50
-		\\
-		Bronce                    & 30                                        & 40
-		                          & 300                                       & 380
-		\\
-		Latón y cobre             & 40                                        & 50
-		                          & 350                                       & 400
-		\\
-		Aluminio                  & 60                                        & 90
-		                          & 500                                       & 700
-		\\
-		Fibra y ebonita           & 25                                        & 40
-		                          & 120                                       & 150 \\
-		\bottomrule
-	\end{tabular}
-\end{table}
-Observa que: la pastilla carburada permite velocidades mucho mayores que el
+Datos: la pastilla carburada permite velocidades mucho mayores que el
 acero rápido; el acabado siempre usa más velocidad que el desbaste; y los
 materiales blandos (aluminio, latón, cobre, bronce) se cortan a mayor velocidad
 que los aceros y fundiciones duras.
 
-\subsection{Ejercicios resueltos}
-
 \subsubsection*{Ejercicio 1: cilindrado de una pieza}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{img/torno-ejercicio-1.png}
+\end{figure}
+
 \textbf{Enunciado:} cilindrar una pieza de $D = 100$ mm a $d = 88$ mm, $L = 200$
 mm. Torno con $n_D = 130$ rpm (desbaste) y $n_A = 235$ rpm (acabado), avance $a
 	= 0.3$ mm/rev. Profundidad de desbaste 4 mm y de acabado 2 mm; útil
@@ -1011,9 +981,8 @@ perpendicular a la pieza ($\omega = 90^\circ$, $\Delta = 0$); retiro $y = 3$ mm.
 		m/min} \]
 
 \textbf{c) Número de pasadas de desbaste:}
-\[ \frac{100-88}{2} = 6 = N_A P_A + N_D P_D = 1(2) + N_D P_D \]
-La solución manuscrita de la diapositiva usa $P_D = 3$ mm: $N_D = 4/3 = 1.33
-	\approx 2$ pasadas.
+\[ \frac{100-88}{2} = 6 = N_A P_A + N_D P_D = 1(2) + N_D (4) \]
+Default $N_A = 0$: $N_D = 4/4 = 1$ pasada (aproxima hacia entero superior).
 
 \textbf{d) Velocidad de giro recomendada} si $v = 40$ m/min:
 \[ n = \frac{2v}{D_i} = \frac{40\ \text{m/min}\cdot 1000}{\pi\cdot 100\
@@ -1023,21 +992,16 @@ La solución manuscrita de la diapositiva usa $P_D = 3$ mm: $N_D = 4/3 = 1.33
 (se elige la velocidad disponible más cercana).
 
 \textbf{e) Tiempo de maquinado del desbaste:}
-\[ t_D = N_D\left[\frac{L + y + \Delta}{a\, n_D}\right] = 1\left[\frac{200 + 3 +
-			0}{0.3\cdot 130}\right] = \mathbf{5.2\ min} \]
-
-\begin{aviso}[Inconsistencia en la solución de las diapositivas]
-	El enunciado dice \textbf{$P_D = 4$ mm}, pero la solución manuscrita usa $P_D
-		= 3$ mm en (c) y obtiene 1.33 $\approx$ 2 pasadas, mientras que en (e) usa
-	\textbf{$N_D = 1$}. Con $P_D = 4$ mm del enunciado: $6 = 2 + N_D(4)
-		\Rightarrow
-		N_D = 1$ pasada exacta, que sí es coherente con (e). Para el examen,
-	asegúrate
-	de usar los datos del enunciado que te den y de verificar que el número de
-	pasadas resulte entero.
-\end{aviso}
+\[ t_D = N_D\left[\frac{L + y + \Delta}{a\, n_D}\right] = 1\left[\frac{200 + 4 +
+			0}{0.3\cdot 130}\right] = \mathbf{5.23\ min} \]
 
 \subsubsection*{Ejercicio 2: barra de 60 mm a 48.4 mm}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{img/torno-ejercicio-2.png}
+\end{figure}
+
 \textbf{Enunciado:} barras de 237 mm de largo y 60 mm de diámetro, a cilindrar
 hasta 48.4 mm. Avances 0.2 y 0.8 mm/rev; velocidades de rotación 128 y 207 rpm.
 Se programan \textbf{3 pasadas de desbaste} de igual profundidad a lo largo de
@@ -1068,6 +1032,12 @@ inicial del acabado es $D_{iA} = 60 - 6(1.8) = 49.2$ mm.
 
 \subsubsection*{Ejercicio 3: cilindrado interior y tronzado de un bloque hueco
 	SAE 1045}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{img/torno-ejercicio-3.png}
+\end{figure}
+
 \textbf{Enunciado:} bloque cilíndrico hueco SAE 1045, $D_{ext} = 100$ mm,
 $D_{int} = 64$ mm, longitud 250 mm. Cilindrado interior con profundidad total de
 2 mm: 3 pasadas de desbaste de 0.6 mm y 1 de acabado. Pastilla carburada.
@@ -1091,6 +1061,12 @@ con $\omega = 90^\circ$ ($\Delta = 0$) y $y = 2$ mm:
 \[ t_p = \frac{16 + 2 + 0}{0.2032\cdot 217.03} = \mathbf{0.408\ min} \]
 
 \subsubsection*{Ejercicio 4: refrentado de una pieza maciza SAE 1035 de 300 mm}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{img/torno-ejercicio-4.png}
+\end{figure}
+
 \textbf{Enunciado:} refrentado con $n = 48$ rpm hasta alcanzar $D = 200$ mm;
 luego 74 rpm hasta $D = 100$ mm; luego 116 rpm hasta el centro. Avance $a = 0.2$
 mm/rev, retiro $y = 2$ mm, $\Delta = 0$ (herramienta a ángulo recto). Calcular:
@@ -1126,25 +1102,11 @@ cada tramo:
 \[ Q = v_L A = 9.6\cdot 39\,269.9 \approx 376\,990\ \text{mm}^3/\text{min}
 	\approx \mathbf{377\ cm^3/min} \]
 
-\begin{aviso}[Error numérico en las diapositivas]
-	Las diapositivas escriben $t_{maquinado} = 10.81$ min y ahorro $= 5.02$ min.
-	Sin embargo, $5.42 + 3.51 + 2.24 = 11.17$ min (no 10.81) y por tanto el ahorro
-	es $15.83 - 11.17 = 4.66$ min. El \textbf{método} es el correcto; solo la suma
-	final está mal en el material. Si tu examen incluye este ejercicio, usa los
-	valores recalculados aquí.
-\end{aviso}
+\newpage
 
 % =====================================================================
-\newpage
 \section{Semana 4: Fresado}
 % =====================================================================
-
-\textbf{Contenidos:} introducción (características del proceso y tipos de
-piezas, descripción del proceso), operaciones y herramientas comunes,
-herramientas de fresado (partes, ángulos de los filos, acción de cada diente),
-parámetros de fresado (básicos, avance por diente y espesor de viruta, sección
-de viruta, fuerza de corte, potencia de corte), fresadoras (descripción y
-arquitecturas) y cuestionario.
 
 \subsection{Introducción}
 
@@ -1226,6 +1188,12 @@ distinguen:
 	      \textbf{axial} ($\gamma_a$) y \textbf{radial} ($\gamma_r$).
 	\item Ángulo de incidencia ($\alpha$).
 \end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{img/fresa-angulos.png}
+\end{figure}
+
 Según los signos de $\gamma_a$ y $\gamma_r$ hay tres tipos de geometría:
 \textbf{doblemente negativa}, \textbf{positiva--negativa} y \textbf{doblemente
 	positiva}. \textbf{Hacia la doblemente negativa} $\Rightarrow$ \textbf{mayor
@@ -1328,6 +1296,11 @@ fresado.
 	      elemento mueve cada eje: mesa, columna, cabezal, etc.).
 \end{itemize}
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{img/fresa-arquitecturas.png}
+\end{figure}
+
 \subsection{Cuestionario tutorizado (con ideas de respuesta)}
 Las diapositivas solo plantean las preguntas; las respuestas siguientes son
 \emph{orientativas} para que practiques.
@@ -1393,14 +1366,7 @@ Tasa de remoción $Q = 45\ \text{cm}^3/\text{min} = 0.45\times 10^{-4}\
 	\cdot 0.45\times10^{-4}\ \text{m}^3/\text{min} = 9\times10^4\ \text{N·m/min} =
 	1500\ \text{W}$.)
 
-\begin{aviso}[Sobre la solución de este ejercicio en las diapositivas]
-	La imagen de la solución del ejercicio 3 tiene texto desordenado (aparece una
-	``wait, conversión fact\ldots'' a medio escribir). El resultado correcto es
-	\textbf{1.5 kW}, como se muestra arriba; ignora el resto del texto confuso.
-\end{aviso}
-
-Las diapositivas que siguen a estos ejercicios están vacías (solo el título
-``EJERCICIOS''). Cierran con empresas y productos que usan fresado: matrices de
+Cierran con empresas y productos que usan fresado: matrices de
 estampación, piezas aeronáuticas de fuselaje, piezas de precisión, rodetes de
 turbinas para el sector hidroeléctrico y satélites.
 
