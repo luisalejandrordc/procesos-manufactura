@@ -1302,40 +1302,77 @@ fresado.
 \end{figure}
 
 \subsection{Cuestionario tutorizado (con ideas de respuesta)}
-Las diapositivas solo plantean las preguntas; las respuestas siguientes son
+Se incluye el enunciado de cada pregunta (cursiva) seguido de su respuesta. Las
+diapositivas solo plantean las preguntas; las respuestas son
 \emph{orientativas} para que practiques.
 \begin{enumerate}
-	\item \textbf{Geometrías difíciles o imposibles de fresar:} cavidades internas
+	\item \textit{A pesar de que el proceso de fresado sea muy versátil, piensa en
+		      geometrías de pieza que sean muy difíciles/imposibles de realizar
+		      mediante
+		      fresado.}\par
+	      \textbf{Respuesta -- Geometrías difíciles o imposibles de fresar:}
+	      cavidades internas
 	      cerradas sin acceso para la herramienta, huecos profundos y estrechos
 	      (la
 	      herramienta no cabe o se flexiona), esquinas internas con radio menor al
 	      de la
 	      fresa, y socavados sin acceso.
-	\item \textbf{Número máximo de ejes:} suelen incorporar hasta \textbf{5 ejes}.
+	\item \textit{¿Cuál es el número máximo de ejes que suelen incorporar las
+		      fresadoras? ¿Qué ventajas puede tener incorporarlos? ¿Y qué
+		      desventajas?}\par
+	      \textbf{Respuesta -- Número máximo de ejes:} suelen incorporar hasta
+	      \textbf{5 ejes}.
 	      Ventajas: mecanizar geometrías complejas en una sola sujeción, mejor
 	      acabado y
 	      accesibilidad. Desventajas: mayor costo, programación más compleja y
 	      riesgo de
 	      colisiones.
-	\item \textbf{Viruta en fresado:} el corte es \textbf{intermitente}; cada
+	\item \textit{En las operaciones de torneado, la viruta puede enredarse entre
+		      la herramienta y la pieza, lo que genera grandes problemas para poder
+		      retirarla
+		      de la zona de trabajo; sin embargo, en fresado esto no es ningún
+		      problema.
+		      ¿Podrías explicar por qué?}\par
+	      \textbf{Respuesta -- Viruta en fresado:} el corte es
+	      \textbf{intermitente}; cada
 	      diente produce una viruta corta y discontinua, que se desprende
 	      fácilmente, a
 	      diferencia del torneado donde la viruta es continua y puede enredarse.
-	\item \textbf{Rugosidad:} la secuencia de golpes de los filos deja una marca
+	\item \textit{Dibuja una secuencia de golpeo de varios filos sobre una pieza.
+		      ¿A partir de este dibujo podrías obtener una relación entre los
+		      parámetros de
+		      fresado y la rugosidad superficial resultante? ¿Qué parámetro es el
+		      más
+		      influyente?}\par
+	      \textbf{Respuesta -- Rugosidad:} la secuencia de golpes de los filos
+	      deja una marca
 	      por cada avance por filo; la rugosidad aumenta con el avance por filo
 	      $f_z$ (y
 	      disminuye con el radio de punta). El parámetro más influyente es el
 	      \textbf{avance por filo} $f_z$.
-	\item \textbf{Componentes de la fuerza:} la \textbf{tangencial} (la de corte)
+	\item \textit{Además de la fuerza de corte hay otras dos componentes: radial y
+		      tangencial. ¿Puedes explicar cómo influye cada una de estas
+		      componentes en el
+		      proceso de fresado?}\par
+	      \textbf{Respuesta -- Componentes de la fuerza:} la \textbf{tangencial}
+	      (la de corte)
 	      genera el par y determina la potencia; la \textbf{radial}
 	      empuja/flexiona la
 	      herramienta o la pieza y afecta a la precisión dimensional y a las
 	      vibraciones.
-	\item \textbf{Fresadora horizontal vs.\ vertical:} mejor evacuación de la
+	\item \textit{¿Qué ventajas puede tener utilizar una fresadora horizontal
+		      frente a una vertical?}\par
+	      \textbf{Respuesta -- Fresadora horizontal vs.\ vertical:} mejor
+	      evacuación de la
 	      viruta por gravedad y posibilidad de emplear fresas tipo disco o varias
 	      fresas
 	      en el mismo árbol.
-	\item \textbf{Mesa inmóvil y herramienta móvil:} no hay que mover el peso de
+	\item \textit{¿Qué ventaja puede tener utilizar una fresadora donde el
+		      movimiento de los ejes sea transmitido directamente a la herramienta,
+		      mientras
+		      que la mesa donde se coloca la pieza permanece inmóvil?}\par
+	      \textbf{Respuesta -- Mesa inmóvil y herramienta móvil:} no hay que mover
+	      el peso de
 	      la pieza (útil en piezas grandes y pesadas), lo que mejora la dinámica y
 	      la
 	      precisión.
@@ -1369,6 +1406,466 @@ Tasa de remoción $Q = 45\ \text{cm}^3/\text{min} = 0.45\times 10^{-4}\
 Cierran con empresas y productos que usan fresado: matrices de
 estampación, piezas aeronáuticas de fuselaje, piezas de precisión, rodetes de
 turbinas para el sector hidroeléctrico y satélites.
+
+% =====================================================================
+\newpage
+\section{Semana 5: Taladrado}
+% =====================================================================
+
+\textbf{Contenidos:} introducción (características del proceso y tipos de
+piezas, descripción del proceso), herramientas de taladrado (partes de una
+broca, ángulos de los filos), operación de taladrado (parámetros básicos,
+sección de viruta, fuerza y potencia de corte), otras operaciones de taladrado
+(taladrado profundo, mandrinado, escariado), cuestionario tutorizado y
+ejercicios.
+
+\subsection{Introducción}
+
+\subsubsection{Características del proceso y tipos de piezas}
+\begin{defi}[Taladrado]
+	Operación de mecanizado \textbf{limitada a hacer agujeros cilíndricos}. La
+	herramienta se llama \textbf{broca}.
+\end{defi}
+
+\textbf{Piezas típicas:} sector aeronáutico (piezas de aleación de níquel y de
+aleación de titanio con muchos taladros), sector de automoción (bielas de acero,
+piezas de fundición, culatas y bloques de motor de aleaciones ligeras).
+
+\begin{center}
+	\begin{tabular}{@{}p{7.3cm}p{7.3cm}@{}}
+		\toprule
+		\textbf{Ventajas}
+		                                                                          &
+		\textbf{Limitaciones}
+		\\
+		\midrule
+		\begin{itemize}[leftmargin=10pt,nosep]
+			\item Operación \textbf{rápida}.
+			\item Precisión y acabado superficial mejorados en comparación con
+			      fundición/forja.
+			\item Posibilidad de realizar agujeros de \textbf{diferentes diámetros}.
+			\item Diferentes materiales (con limitación en materiales muy duros).
+		\end{itemize} &
+		\begin{itemize}[leftmargin=10pt,nosep]
+			\item Agujeros con \textbf{elevada relación longitud/diámetro} (L/D).
+			\item El acabado del agujero \textbf{puede no ser suficiente} en algunas
+			      aplicaciones (de ahí el escariado y el mandrinado).
+		\end{itemize}    \\
+		\bottomrule
+	\end{tabular}
+\end{center}
+
+\subsubsection{Descripción del proceso}
+\begin{itemize}
+	\item \textbf{Aplicación:} mecanizado de agujeros de diferente profundidad y
+	      diámetro.
+	\item Se combinan \textbf{dos movimientos}: el \textbf{movimiento principal o
+		      de corte} y el \textbf{movimiento de avance}.
+	\item \textbf{Movimiento principal:} \textbf{giro de la herramienta (la
+		      broca)}. Consume la mayor potencia y tiene velocidad mayor que el de
+	      avance.
+	\item \textbf{Movimiento de avance:} desplazamiento de la broca a lo largo de
+	      su eje, hacia dentro de la pieza.
+\end{itemize}
+
+\subsection{Herramientas de taladrado: la broca}
+\textbf{Partes de una broca:} se divide en \textbf{mango} (por donde se sujeta a
+la máquina) y \textbf{parte cortante}. En la parte cortante suele haber varios
+dientes (\textbf{es muy común que haya 2}). En cada uno se distinguen:
+\begin{itemize}
+	\item \textbf{Filo principal} y \textbf{filo secundario}.
+	\item \textbf{Superficie de incidencia} y \textbf{superficie de
+		      desprendimiento} (por donde sale la viruta).
+	\item \textbf{Filo transversal:} pequeño filo adicional en la punta que une
+	      los dos filos principales.
+	\item Muchas brocas tienen \textbf{agujeros para lubricación interna}.
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{img/broca-partes.png}
+\end{figure}
+
+\textbf{Ángulos de los filos de una broca:}
+\begin{itemize}
+	\item Ángulo de posición del filo principal ($\kappa_r$).
+	\item Ángulo de desprendimiento ($\gamma$).
+	\item Ángulo de incidencia ($\alpha$).
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{img/broca-angulos.png}
+\end{figure}
+
+\begin{compl}[Complemento: ángulo de punta]
+	En los ejercicios de las diapositivas la broca tiene \textbf{ángulo de punta
+		de 118$^\circ$} (valor estándar para brocas helicoidales HSS). El ángulo de
+	posición del filo principal es la mitad: $\kappa_r = 118^\circ/2 = 59^\circ$
+	(en
+	el ejercicio 8 se usa 60$^\circ$ aproximado).
+\end{compl}
+
+\subsection{Operación de taladrado: parámetros}
+
+\begin{formu}[Parámetros básicos]
+	\textbf{Velocidad de corte (m/min):}
+	\[ V_c = \frac{\pi\, D\, N}{1000} \qquad\Longleftrightarrow\qquad N =
+		\frac{1000\,V_c}{\pi D} \]
+	$D$ = diámetro de la broca (mm); $N$ = velocidad de rotación (rpm).\\[4pt]
+	\textbf{Velocidad de avance (mm/min):} $V_f$.\\[4pt]
+	\textbf{Avance por filo (mm/diente):}
+	\[ f_z = \frac{V_f}{z\, N} \]
+	$z$ = número de filos. Con $f = z\,f_z$ (avance por vuelta, mm/rev): $\;V_f =
+		f\cdot N$.
+\end{formu}
+
+\begin{formu}[Espesor, anchura y sección de viruta]
+	\[ a_c = f_z \sin\kappa_r \qquad a_w = \frac{D/2}{\sin\kappa_r} \qquad S_c =
+		a_c\, a_w \;\;\text{o también}\;\; S_c = f_z\,\frac{D}{2} \]
+	$a_c$ = espesor de corte (mm); $a_w$ = anchura de viruta (mm); $S_c$ = sección
+	de viruta (mm$^2$); $\kappa_r$ = ángulo de posición del filo principal. Para
+	una broca de 2 filos, $f_z = f/2$.
+\end{formu}
+
+\begin{formu}[Fuerza y potencia de corte]
+	\[ F_c = p_s\, S_c \qquad\qquad P_c = \frac{z\cdot F_c\cdot \dfrac{V_c}{2}}{60}
+		\;\;\text{(W)} \]
+	$F_c$ (N); $p_s$ = energía (presión) específica de corte (N/mm$^2$); $V_c$
+	(m/min). El factor $V_c/2$ aparece porque la velocidad de corte varía de 0 en
+	el
+	centro a $V_c$ en el borde; se toma el valor medio (a mitad del radio). El 60
+	pasa de m/min a m/s.
+\end{formu}
+
+\begin{compl}[Complemento: fórmulas usadas en los ejercicios (no están en la
+		teoría)]
+	\begin{itemize}[nosep]
+		\item \textbf{Altura de la punta:} $h = \dfrac{D}{2\tan(\alpha_p/2)} =
+			      \dfrac{D}{2\tan 59^\circ}$ con $\alpha_p = 118^\circ$.
+		\item \textbf{Longitud de penetración:} $L = e + h + s$, con $e$ = espesor
+		      (profundidad) del agujero, $h$ = altura de la punta y $s$ = salida de
+		      seguridad
+		      (si es agujero pasante). Equivale a $h=\dfrac{D}{2}\tan(90^\circ -
+			      \alpha_p/2) =
+			      \dfrac{D}{2}\tan 31^\circ$.
+		\item \textbf{Tiempo de corte:} $t_c = \dfrac{L}{V_f} = \dfrac{L}{f\,N}$.
+		\item \textbf{Potencia y par:} $P = \dfrac{2\pi N T}{60}$ (W, con $T$ en
+		      N$\cdot$m y $N$ en rpm), de donde $T = \dfrac{60\,P}{2\pi N}$.
+		\item \textbf{Potencia en el husillo:} $P_h = \eta\, P_{motor}$.
+		\item \textbf{Potencia de corte:} $P_c = F_c\, v_c$ (con $v_c$ en m/s); con
+		      pérdidas: $P_{total} = P_c(1 + \text{pérdidas})$ (como lo hace la
+		      diapositiva).
+		\item \textbf{Caudal de viruta (tasa de remoción):} $\dot z = \dfrac{\pi
+				      D^2}{4}\, f\, N$; y $P = E_s\,\dot z$ con $E_s$ la energía
+		      específica de corte
+		      (J/m$^3$).
+		\item \textbf{Taladrado con picado (\emph{peck drilling}):} número de
+		      penetraciones $n = \dfrac{\text{profundidad}}{\text{penetración por
+					      ciclo}}$.
+		\item \textbf{Producción:} $Q = \dfrac{3600}{t_{total}}$ agujeros/hora (con
+		      $t_{total}$ en s, incluyendo tiempos muertos).
+	\end{itemize}
+\end{compl}
+
+\subsection{Otras operaciones de taladrado}
+\begin{itemize}
+	\item \textbf{Taladrado convencional:} tiene limitaciones cuando la relación
+	      L/D es muy alta.
+	      \begin{itemize}
+		      \item \textbf{Brocas helicoidales enterizas:} L/D $\le$ 5--10.
+		      \item \textbf{Brocas de plaquitas:} L/D $<$ 2.5.
+	      \end{itemize}
+	\item \textbf{Taladrado profundo:} con \textbf{broca cañón}, L/D = 15--40.
+	\item \textbf{Mandrinado:} sirve para \textbf{aumentar el tamaño de un
+		      agujero} ya hecho a un diámetro con \textbf{alta precisión}. Se parte
+	      de un
+	      agujero y se aumenta el diámetro.
+	\item \textbf{Escariado:} para conseguir un \textbf{excelente acabado y
+		      precisión} en un taladro. Se parte de un agujero y únicamente se
+	      mecanizan
+	      \textbf{décimas de milímetro}.
+\end{itemize}
+
+\subsection{Cuestionario tutorizado (con ideas de respuesta)}
+Las diapositivas solo plantean las preguntas; las respuestas son
+\emph{orientativas}.
+\begin{enumerate}
+	\item \textit{En la punta de las brocas, la unión de los filos se realiza
+		      mediante un pequeño filo adicional denominado filo transversal.
+		      ¿Podrías
+		      explicar qué función tiene?}\par
+	      \textbf{Respuesta:} une los dos filos principales en el centro de la
+	      broca. En
+	      el centro la velocidad de corte es casi nula, así que ahí el filo
+	      transversal no
+	      corta bien sino que \textbf{aplasta/extruye} el material, generando gran
+	      parte
+	      de la fuerza axial (empuje). Es la zona que \textbf{centra} la broca al
+	      iniciar
+	      el agujero, y a la vez la que más se desgasta y calienta.
+	\item \textit{Para la operación de taladrado, ¿podría servir alguna de las
+		      máquinas que se han estudiado?}\par
+	      \textbf{Respuesta:} sí. El \textbf{torno} (la broca se monta en la
+	      contrapunta
+	      o en la torreta y la pieza gira; sirve para agujeros centrados en piezas
+	      de
+	      revolución) y la \textbf{fresadora} (la broca se monta en el cabezal;
+	      permite
+	      agujeros en cualquier posición XY de la pieza).
+	\item \textit{¿Por qué muchas brocas disponen de unos orificios por donde se
+		      inyecta un fluido coaxial a la herramienta? ¿Podrías exponer al menos
+		      tres
+		      razones?}\par
+	      \textbf{Respuesta:} (1) \textbf{refrigerar} la zona de corte y reducir
+	      el desgaste; (2) \textbf{lubricar} (menos fricción y menor fuerza y
+	      potencia);
+	      (3) \textbf{evacuar la viruta} del agujero, evitando atascos, sobre todo
+	      en
+	      agujeros profundos; (4) mejorar el acabado del agujero y la vida de la
+	      herramienta.
+	\item \textit{¿Se podría realizar un taladrado con una fresa? ¿Cómo se podría
+		      realizar y qué ventajas y desventajas se obtendrían?}\par
+	      \textbf{Respuesta:} sí, con una fresa de \textbf{filo al centro}, bien
+	      \textbf{penetrando axialmente} (como una broca, rampa o ``plunge'') o,
+	      mejor,
+	      haciendo una \textbf{interpolación helicoidal} con control numérico.
+	      \emph{Ventajas:} una misma fresa sirve para muchos diámetros, se obtiene
+	      mejor
+	      precisión y se mecanizan agujeros mayores que la herramienta, además de
+	      poder
+	      hacer agujeros ciegos con fondo plano. \emph{Desventajas:} más lento que
+	      una
+	      broca, mayor tiempo de programación, y requiere una máquina CNC con
+	      interpolación.
+	\item \textit{Además de la broca cañón, existen otra serie de soluciones para
+		      realizar operaciones de taladrado profundo. ¿Podrías investigar qué
+		      sistemas/máquinas de taladrado profundo se pueden encontrar en el
+		      mercado para
+		      la realización de agujeros de gran profundidad y con diámetros
+		      superiores a 15
+		      mm de diámetro?}\par
+	      \textbf{Respuesta:} es una pregunta de investigación; no se da en la
+	      teoría.
+	      Referencias habituales: \textbf{BTA/STS} (\emph{single-tube system}, con
+	      refrigerante por el exterior y viruta por el interior del tubo, para
+	      $\varnothing >$ 15 mm) y \textbf{sistema eyector} (tubo doble), además
+	      de
+	      máquinas específicas de taladrado profundo. Verifícalo con tu profesor o
+	      con
+	      catálogos de fabricantes.
+\end{enumerate}
+
+\subsection{Ejercicios resueltos}
+
+\subsubsection*{Ejercicio 1: taladrado pasante en acero AISI 1045}
+\textbf{Enunciado:} agujero pasante de $\varnothing 25$ mm en una pieza de acero
+AISI 1045 de \textbf{50 mm de espesor}. Broca helicoidal HSS con $V_c = 25$
+m/min, $f = 0.22$ mm/rev y ángulo de punta 118$^\circ$. Salida de seguridad de 3
+mm. Determinar: (1) rpm del husillo, (2) velocidad de avance, (3) longitud total
+de penetración, (4) tiempo efectivo de taladrado.
+
+\textbf{1)} $N = \dfrac{1000\,V_c}{\pi D} = \dfrac{1000(25)}{\pi(25)} = 318.31$
+rpm $\Rightarrow$ se toma $\mathbf{N = 320\ rpm}$.\\
+\textbf{2)} $V_f = f\,N = 0.22(320) = \mathbf{70.4\ mm/min}$.\\
+\textbf{3)} Altura de la punta: $h = \dfrac{D}{2\tan 59^\circ} =
+	\dfrac{25}{2\tan 59^\circ} = 7.51$ mm. \[ L = 50 + 7.51 + 3 = \mathbf{60.51\
+		mm}
+\]
+\textbf{4)} $t = \dfrac{L}{V_f} = \dfrac{60.51}{70.4} = 0.8595\ \text{min}
+	\approx \mathbf{51.6\ s}$.
+
+\subsubsection*{Ejercicio 2: potencia y par en el husillo}
+\textbf{Enunciado:} motor de $P = 4.0$ kW, eficiencia mecánica total $\eta =
+	82\,\%$ hasta el husillo; la broca trabaja a $N = 450$ rpm. Determinar: (1)
+potencia disponible en el husillo, (2) par máximo teórico disponible, (3) si en
+el taladrado se requiere un par de 62 N$\cdot$m, el porcentaje de utilización,
+(4) la potencia mecánica realmente requerida para producir ese par.
+
+\textbf{1)} $P_h = \eta P = 0.82(4) = \mathbf{3.28\ kW}$.\\
+\textbf{2)} $T = \dfrac{60 P}{2\pi N} = \dfrac{60(3280)}{2\pi(450)} \approx
+	\mathbf{69.53\ N\cdot m}$.\\
+\textbf{3)} $\%U = \dfrac{62}{69.53}(100) = \mathbf{89.17\,\%}$ (la operación
+usa $\approx$ 89 \% del par disponible).\\
+\textbf{4)} $P = \dfrac{2\pi N T}{60} = \dfrac{2\pi(450)(62)}{60} \approx
+	\mathbf{2.92\ kW}$.
+
+\subsubsection*{Ejercicio 3: agujero profundo con picado (\emph{peck drilling})}
+\textbf{Enunciado:} agujero de $\varnothing 12$ mm $\times$ 96 mm de profundidad en acero aleado. Broca: $D = 12$ mm, ángulo de punta 118$^\circ$, $V_c = 18$ m/min, $f = 0.12$ mm/rev. Como $L/D = 8$ (relación alta) se usa \textbf{peck drilling} con \textbf{penetraciones de 24 mm} y retracción para evacuar la viruta. Determinar: (1) rpm, (2) avance, (3) número mínimo de penetraciones, (4) tiempo aproximado de corte suponiendo que las retracciones no generan tiempo de corte.
+
+\textbf{1)} $N = \dfrac{1000(18)}{\pi(12)} = 477.5$ rpm $\Rightarrow$ $\mathbf{N
+		= 480\ rpm}$.\\
+\textbf{2)} $V_f = f N = 0.12(480) = \mathbf{57.6\ mm/min}$.\\
+\textbf{3)} $n = \dfrac{96}{24} = \mathbf{4}$ penetraciones.\\
+\textbf{4)} $t = \dfrac{96}{57.6} = 1.667\ \text{min} \approx \mathbf{100\ s}$
+(se cuenta solo la profundidad total; no incluye punta ni tiempos de
+retracción).
+
+\subsubsection*{Ejercicio 4: tiempo de corte en una placa de 45 mm}
+\textbf{Enunciado:} agujero pasante en una placa de acero de 45 mm, broca HSS de 20 mm, ángulo de punta 118$^\circ$, $V_c = 40$ m/min, $f = 0.20$ mm/rev. Calcular: (a) rpm, (b) longitud total de penetración, (c) tiempo de corte.
+
+\textbf{(a)} $n = \dfrac{1000\,V_c}{\pi D} = \dfrac{1000\cdot 40}{\pi\cdot 20} =
+	\mathbf{636.62\ rpm}$.\\
+\textbf{(b)} $L = e + \dfrac{D}{2}\tan\!\left(90^\circ -
+	\dfrac{\alpha}{2}\right) = 45 + 10\tan 31^\circ = 45 + 10(0.6009) =
+	\mathbf{51.01\ mm}$.\\
+\textbf{(c)} $t_c = \dfrac{L}{f\,n} = \dfrac{51.01}{0.20(636.62)} =
+	\dfrac{51.01}{127.32} = 0.40\ \text{min} = \mathbf{24.0\ s}$.
+
+\subsubsection*{Ejercicio 5: diámetro máximo viable según la potencia (energía
+	específica)}
+\textbf{Enunciado:} taladrado de acero con energía específica de corte $E_s =
+	1.9\ \text{GJ/m}^3$ con broca de 17 mm. Máquina de 500 W con rendimiento del
+90\,\%; avance 0.20 mm/rev y 300 rpm. Calcular el par de torsión y verificar si
+el diámetro es viable.
+
+\begin{align*}
+	\dot W & = P\,\eta = 500(0.90) = 450\ \text{W}                                                                                  \\
+	T      & = \frac{\dot W}{2\pi\,n/60} = \frac{450}{2\pi\cdot 5} =
+	\frac{450}{31.42} =
+	\mathbf{14.32\ N\cdot m}
+	\\
+	\dot W & = E_s\,\dot z \;\Rightarrow\; \dot z = \frac{450}{1.9\times10^{9}} =
+	2.37\times10^{-7}\ \text{m}^3/\text{s} = 236.84\ \text{mm}^3/\text{s}
+	\\
+	\dot z & = \frac{\pi D^2}{4}\, f\,\frac{n}{60} \;\Rightarrow\; 236.84 = \frac{\pi D^2}{4}(0.20)(5) \;\Rightarrow\; D^2 = 301.56 \\
+	D      & = 17.37\ \text{mm}
+\end{align*}
+\textbf{Conclusión:} el diámetro máximo que permite la potencia es $\approx$
+17.37 mm $\geq$ 17 mm, por lo que \textbf{la broca de 17 mm es viable}.
+
+\subsubsection*{Ejercicio 6: cinco taladros consecutivos}
+\textbf{Enunciado:} 5 taladros pasantes en una placa de 45 mm con brocas de 8,
+20, 30, 40 y 53 mm. $V_c = 40$ m/min en todos y avance $f = D/100$ mm/rev ($D$
+en mm). Calcular el tiempo de corte en cada diámetro (ángulo de punta
+118$^\circ$).
+
+Para cada uno: $n = \dfrac{40000}{\pi D}$, $L = 45 + \dfrac{D}{2}(0.6009)$, $t_c
+	= \dfrac{L}{f\,n}$.
+
+\begin{center}
+	\small
+	\begin{tabular}{@{}rcccccc@{}}
+		\toprule
+		$D$ (mm) & $f$ (mm/rev) & $n$ (rpm) & $L$ (mm) & $V_f$ (mm/min) & $t_c$ (min) & $t_c$ (s) \\
+		\midrule
+		8        & 0.08         & 1591.55   & 47.40    & 127.32         & 0.372
+		         & 22.34
+		\\
+		20       & 0.20         & 636.62    & 51.01    & 127.32         & 0.401
+		         & 24.04
+		\\
+		30       & 0.30         & 424.41    & 54.01    & 127.32         & 0.424
+		         & 25.45                                                                          \\
+		40       & 0.40         & 318.31    & 57.02    & 127.32         & 0.448
+		         & 26.87
+		\\
+		53       & 0.53         & 240.24    & 60.92    & 127.33         & 0.478
+		         & 28.71
+		\\
+		\bottomrule
+	\end{tabular}
+\end{center}
+\textbf{Observación:} como $f = D/100$ y $n = 40000/(\pi D)$, la velocidad de avance $V_f = f\,n = 400/\pi \approx 127.32$ mm/min \textbf{es la misma para todos los diámetros}; por eso el tiempo solo crece con la longitud $L$. (Suma de los cinco: $\approx$ 127.4 s, cálculo propio.)
+
+\subsubsection*{Ejercicio 7: potencia del taladro de columna}
+\textbf{Enunciado:} un taladro de columna desarrolla una fuerza de corte de 5000
+N con velocidad de corte de 37 m/min. El motor eléctrico tiene pérdidas del
+12\,\%. Calcular la potencia del taladro en kW y en CV.
+
+\[ P_{corte} = F\,v = 5000\ \text{N}\cdot\frac{37}{60}\ \text{m/s} =
+	5000(0.6167) = 3083.33\ \text{W} \]
+\[ P_{total} = P_{corte} + 0.12\,P_{corte} = 3083.33(1.12) = 3453.33\ \text{W} =
+	\mathbf{3.45\ kW} \]
+\[ P_{total} = \frac{3453.33}{735.5} = \mathbf{4.70\ CV} \qquad (1\ \text{CV} =
+	735.5\ \text{W}) \]
+
+\begin{aviso}[Cómo se interpretan las pérdidas]
+	La diapositiva suma el 12\,\% \emph{sobre la potencia de corte} ($\times
+		1.12$). Si el enunciado se interpretara como pérdidas del 12\,\% \emph{de la
+		potencia del motor} (rendimiento de 0.88), saldría $3083.33/0.88 = 3503.8$ W
+	$\approx$ 3.50 kW. En el examen sigue el método de tu profesor (el de las
+	diapositivas es $\times1.12$).
+\end{aviso}
+
+\subsubsection*{Ejercicio 8: presión específica de corte}
+\textbf{Enunciado:} fuerza de corte = 3200 N, $V_c = 25$ m/min, $D = 15$ mm, $f
+	= 0.15$ mm/rev. Calcular la presión específica de corte $p_s$ y compararla con
+el modelo $p_s = 2100\,(a_c/0.4)^{0.29}$ MPa, con $a_c$ el espesor de viruta no
+deformado.
+
+\textbf{Espesor de viruta no deformado} (2 filos, $f_z = f/2$, $\kappa_r =
+	60^\circ$):
+\[ a_c = \frac{f}{2}\sin\kappa_r = \frac{0.15}{2}\sin 60^\circ = 0.075(0.866) =
+	\mathbf{0.065\ mm} \]
+\textbf{Área de la sección de viruta:} $A = a_c\cdot\dfrac{D}{2} = 0.065(7.5) =
+	\mathbf{0.4875\ mm^2}$.\\
+\textbf{Presión específica experimental:}
+\[ p_s = \frac{F}{A} = \frac{3200}{0.4875} = \mathbf{6564\ MPa} \]
+\textbf{Modelo:}
+\[ p_s = 2100\left(\frac{0.065}{0.4}\right)^{0.29} = 2100(0.1625)^{0.29} =
+	2100(0.593) \approx \mathbf{1245\ MPa} \]
+\textbf{Comparación:} el valor experimental (6564 MPa) es \textbf{mucho mayor}
+(alrededor de 5 veces) que el del modelo (1245 MPa). En taladrado la fuerza
+medida incluye el \textbf{empuje axial} sobre el filo transversal y la fricción,
+no solo el corte de los filos principales, por lo que la $p_s$ calculada así
+sale muy elevada.
+
+\begin{aviso}[Nota numérica y de interpretación]
+	Al recalcular, $(0.1625)^{0.29} = 0.590$ y el modelo da $\approx$ 1240 MPa (la
+	diapositiva redondea a 1245). La explicación de la discrepancia (empuje axial,
+	filo transversal) es mía, no de las diapositivas; confírmala con tu profesor.
+\end{aviso}
+
+\subsubsection*{Ejercicio 9: planificación completa de 80 agujeros}
+\textbf{Enunciado:} agujero pasante de $\varnothing 32$ mm en acero AISI 1045 de
+\textbf{60 mm} de espesor. La taladradora ofrece \textbf{250, 315, 400 y 500
+	rpm}. Broca HSS de 32 mm, $V_c = 22$ m/min recomendada, $f = 0.25$ mm/rev,
+ángulo de punta 118$^\circ$. Potencia de husillo $P = 3.5$ kW y potencia de
+corte calculada $P_c = 2.5$ kW. Se desean \textbf{80 agujeros}; por agujero: 4 s
+de posicionamiento, 3 s de aproximación y 3 s de retirada. Determinar: (1) rpm
+teórica, (2) rpm de máquina adecuada, (3) velocidad de corte real, (4) avance,
+(5) longitud efectiva de penetración, (6) tiempo de corte por agujero, (7)
+tiempo total por agujero, (8) tiempo para 80 agujeros, (9) potencia disponible
+respecto a la requerida, (10) producción teórica.
+
+\textbf{1) rpm teórica:} $N = \dfrac{1000(22)}{\pi(32)} = \mathbf{218.86\ rpm}$.
+
+\textbf{2) rpm de máquina:} 250 rpm es la \textbf{inmediata superior disponible}
+(y la más baja de la tabla): $\mathbf{N = 250\ rpm}$.
+
+\textbf{3) Velocidad de corte real:} $V_c = \dfrac{\pi D N}{1000} = \dfrac{\pi(32)(250)}{1000} = \mathbf{25.13\ m/min}$, superior a los 22 m/min recomendados. \emph{Alternativas:} \textbf{A)} trabajar a 250 rpm aceptando 25.13 m/min; \textbf{B)} modificar la transmisión/variador para obtener $\approx$ 219 rpm.
+
+\textbf{4) Avance:} $V_f = f N = 0.25(250) = \mathbf{62.5\ mm/min}$.
+
+\textbf{5) Longitud efectiva:} altura de la punta $h = \dfrac{D}{2\tan 59^\circ}
+	= \dfrac{32}{2\tan 59^\circ} = 9.61$ mm; \[ L = 60 + 9.61 = \mathbf{69.61\ mm}
+\]
+
+\textbf{6) Tiempo de corte:} $t_c = \dfrac{L}{V_f} = \dfrac{69.61}{62.5} =
+	1.1138\ \text{min} = \mathbf{66.83\ s}$.
+
+\textbf{7) Tiempo total por agujero:} tiempos muertos $t_a = 4 + 3 + 3 = 10$ s;
+\[ t_T = 66.83 + 10 = \mathbf{76.83\ s} \]
+
+\textbf{8) Tiempo para 80 agujeros:} $T = 80(76.83) = 6146.4\ \text{s} = 102.44\
+	\text{min} \approx \mathbf{1.71\ h}$.
+
+\textbf{9) Comprobación de potencia:} margen $M = 3.5 - 2.5 = \mathbf{1.0\ kW}$;
+utilización $U = \dfrac{2.5}{3.5}(100) = \mathbf{71.43\,\%}$ (la máquina tiene
+potencia suficiente).
+
+\textbf{10) Producción teórica:} $Q = \dfrac{3600}{76.83} = 46.86 \approx \mathbf{47\ agujeros/h}$.
+
+\begin{aviso}[Observación sobre este ejercicio]
+	La diapositiva calcula la potencia de corte $P_c = 2.5$ kW como dato, no la
+	deduce de la fuerza. Además, al subir de 218.86 a 250 rpm la velocidad real
+	queda 14\,\% por encima de la recomendada; es una decisión de compromiso (sin
+	una velocidad más baja disponible), por eso se plantea la alternativa B.
+\end{aviso}
+
+\subsection{Empresas y productos}
+\textbf{IBARMIA} (taladros de columna), \textbf{LATZ} (brocas helicoidales y centradoras), \textbf{IZAR Cutting Tools} (brocas helicoidales, machos de roscar, escariadores), \textbf{ERLO} (taladros de varios tipos) y \textbf{JUARISTI} (mandrinadoras). Empresas mecanizadoras como ITP, Aernova, Maier, Matrici o Batz realizan operaciones de taladrado de forma sistemática.
 
 % =====================================================================
 \newpage
@@ -1500,8 +1997,7 @@ turbinas para el sector hidroeléctrico y satélites.
 	      pequeña.
 	\item \textbf{Torno vs.\ fresadora:} el torno hace piezas de revolución (gira
 	      la pieza); la fresadora mecaniza piezas sin simetría de revolución (gira
-	      la
-	      herramienta, corte intermitente).
+	      la herramienta, corte intermitente).
 \end{itemize}
 
 \end{document}
