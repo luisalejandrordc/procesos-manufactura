@@ -1,1 +1,1 @@
-# Procesos de Manufactura: Informes de Laboratorio
+# Procesos de Manufactura
